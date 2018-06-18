@@ -5,11 +5,17 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './toolbox.component.html',
   styleUrls: ['./toolbox.component.scss']
 })
-export class ToolboxComponent implements OnInit {
+export class ToolboxComponent {
+  public searchString: string = '';
 
   constructor() { }
 
-  ngOnInit() {
+  search(){
+    console.log(`Search for ${this.searchString}`);
+    this.searchString = '';
   }
 
+  addCourse(){
+    console.log('Click on Add course');
+  }
 }

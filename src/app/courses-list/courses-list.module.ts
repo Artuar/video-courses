@@ -3,11 +3,23 @@ import { CommonModule } from '@angular/common';
 import { ToolboxComponent } from './toolbox/toolbox.component';
 import { CoursesListComponent } from './courses-list.component';
 import { CoursesItemComponent } from './courses-item/courses-item.component';
+import {CoursesService} from "../../shared/courses-list/courses-list.service";
+import {BrowserModule} from "@angular/platform-browser";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
-  imports: [
-    CommonModule
+  imports:      [
+    CommonModule,
+    BrowserModule,
+    FormsModule
   ],
-  declarations: [ToolboxComponent, CoursesListComponent, CoursesItemComponent]
+  declarations: [
+    ToolboxComponent,
+    CoursesListComponent,
+    CoursesItemComponent
+  ],
+  providers: [
+    CoursesService
+  ]
 })
 export class CoursesListModule { }

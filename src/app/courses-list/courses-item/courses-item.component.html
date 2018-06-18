@@ -1,15 +1,15 @@
 <div class="courses_item">
   <div class="course_info">
     <div class="course_data">
-      <div class="title">Video Course 1</div>
-      <div class="time">1h 28m 05.29.2018</div>
+      <div class="title">{{course.title}}</div>
+      <div class="time">{{course.duration}} {{course.creation_date}}</div>
     </div>
     <div class="course_description">
-      Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+      {{course.description}}
     </div>
   </div>
   <div class="course_actions">
-    <div class="edit">Edit</div>
-    <div class="delete">Delete</div>
+    <div class="edit" (click)="edit()">Edit</div>
+    <div class="delete" (click)="delete()">Delete</div>
   </div>
 </div>

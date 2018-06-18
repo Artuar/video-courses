@@ -1,4 +1,7 @@
 <app-toolbox></app-toolbox>
 <div class="course_list">
-  <app-courses-item></app-courses-item>
+  <app-courses-item
+    *ngFor="let course of courses"
+    [course]="course">
+  </app-courses-item>
 </div>

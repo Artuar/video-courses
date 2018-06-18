@@ -1,15 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
+import {Course} from "../../../shared/courses-list/Course";
 
 @Component({
   selector: 'app-courses-item',
   templateUrl: './courses-item.component.html',
   styleUrls: ['./courses-item.component.scss']
 })
-export class CoursesItemComponent implements OnInit {
+export class CoursesItemComponent {
+  @Input() course: Course;
 
   constructor() { }
 
-  ngOnInit() {
+  edit(){
+    console.log(`Click on Edit ${this.course.title} course`);
   }
 
+  delete(){
+    console.log(`Click on Delete ${this.course.title} course`);
+  }
 }
