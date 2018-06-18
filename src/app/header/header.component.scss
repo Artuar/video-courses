@@ -1,0 +1,22 @@
+@import '../../assets/styles/constants';
+
+.header{
+  background-color: $darkBlue;
+  color: $lightGrey;
+  padding: 12px;
+  justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  .logo_block, .user_block{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    align-items: center;
+    .user{
+      padding-right: 12px;
+    }
+    .logo{
+      padding-right: 12px;
+    }
+  }
+}

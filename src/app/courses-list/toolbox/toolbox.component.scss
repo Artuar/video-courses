@@ -1,0 +1,27 @@
+@import '../../../assets/styles/constants';
+
+.toolbox{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 12px;
+  background: $white;
+  box-shadow: 0 2px 3px 0 $grey;
+  .search{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    .search_field{
+      padding: 3px;
+      width: 300px;
+      outline-color: $grey;
+      margin-right: 12px;
+    }
+    .search_button{
+      @include button();
+    }
+  }
+  .add_course{
+    @include button();
+  }
+}

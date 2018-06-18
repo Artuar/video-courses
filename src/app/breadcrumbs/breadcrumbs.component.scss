@@ -1,0 +1,12 @@
+@import '../../assets/styles/constants';
+
+.breadcrumbs{
+  display: flex;
+  flex-direction: row;
+  border-bottom: 1px solid #cdcdcd;
+  .crumb{
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: bold;
+  }
+}

@@ -1,0 +1,12 @@
+$darkBlue: #0049A0;
+$white: #FFFFFF;
+$lightGrey: #f5f5f5;
+$grey: #ccc;
+
+@mixin button(){
+  padding: 6px 12px;
+  background: $darkBlue;
+  color: $white;
+  cursor: pointer;
+  text-align: center;
+}
