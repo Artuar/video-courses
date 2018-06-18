@@ -25,7 +25,7 @@ import {HttpClientModule} from "@angular/common/http";
     CoursesListModule,
     AppRoutingModule,
 
-    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, { delay: 100 })
+    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, { delay: 500 })
   ],
   providers: [
     UserService

@@ -21,8 +21,8 @@ export class CoursesService {
     return throwError(error.message || error);
   }
 
-  getCoursesList(): Observable<Course[]> {
-    return this.http.get(this.apiUrl)
+  getCoursesList(search: string): Observable<Course[]> {
+    return this.http.get(`${this.apiUrl}?title=${search}`)
       .pipe(
         map(response => response as Course[]),
         catchError(this.handleError)

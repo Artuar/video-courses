@@ -6,4 +6,7 @@
   flex-direction: column;
   margin: auto;
   max-width: 1080px;
+  &.loader{
+    @include blockWithPreloader('../../assets/images/rolling48px.svg');
+  }
 }

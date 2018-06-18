@@ -1,7 +1,10 @@
-<app-toolbox></app-toolbox>
-<div class="course_list">
+<app-toolbox (search)="search($event)"></app-toolbox>
+<div class="course_list {{loader && 'loader'}}">
   <app-courses-item
     *ngFor="let course of courses"
     [course]="course">
   </app-courses-item>
+  <div class="not_found" *ngIf="courses.length === 0">
+    Courses not found
+  </div>
 </div>

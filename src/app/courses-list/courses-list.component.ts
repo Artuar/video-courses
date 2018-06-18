@@ -9,15 +9,32 @@ import {CoursesService} from "../../shared/courses-list/courses-list.service";
 })
 export class CoursesListComponent implements OnInit {
   public courses: Course[];
+  public loader: boolean = false;
 
   constructor(
     private coursesService: CoursesService
   ) {}
 
   ngOnInit() {
-    this.coursesService
-      .getCoursesList()
-      .subscribe(courses => this.courses = courses);
+    this.getCourses('');
   }
 
+  search(searchString: string){
+    this.getCourses(searchString);
+  }
+
+  getCourses(searchString: string){
+    this.loader = true;
+    this.coursesService
+      .getCoursesList(searchString)
+      .subscribe(
+        courses => {
+          this.courses = courses;
+          this.loader = false;
+        },
+        () =>  {
+          this.courses = [];
+          this.loader = false
+        });
+  }
 }
