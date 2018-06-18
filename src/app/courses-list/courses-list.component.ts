@@ -8,7 +8,7 @@ import {CoursesService} from "../../shared/courses-list/courses-list.service";
   styleUrls: ['./courses-list.component.scss']
 })
 export class CoursesListComponent implements OnInit {
-  public courses: Course[];
+  public courses: Course[] = [];
   public loader: boolean = false;
 
   constructor(
