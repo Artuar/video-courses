@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {Course} from "../../shared/courses-list/Course";
-import {CoursesService} from "../../shared/courses-list/courses-list.service";
+import {Course} from './shared/Course';
+import {CoursesService} from './shared/courses-list.service';
 
 @Component({
   selector: 'app-courses-list',
@@ -9,7 +9,7 @@ import {CoursesService} from "../../shared/courses-list/courses-list.service";
 })
 export class CoursesListComponent implements OnInit {
   public courses: Course[] = [];
-  public loader: boolean = false;
+  public loader = false;
 
   constructor(
     private coursesService: CoursesService
@@ -19,11 +19,11 @@ export class CoursesListComponent implements OnInit {
     this.getCourses('');
   }
 
-  search(searchString: string){
+  search(searchString: string) {
     this.getCourses(searchString);
   }
 
-  getCourses(searchString: string){
+  getCourses(searchString: string) {
     this.loader = true;
     this.coursesService
       .getCoursesList(searchString)
@@ -34,7 +34,7 @@ export class CoursesListComponent implements OnInit {
         },
         () =>  {
           this.courses = [];
-          this.loader = false
+          this.loader = false;
         });
   }
 }

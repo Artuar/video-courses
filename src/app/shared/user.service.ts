@@ -1,9 +1,9 @@
-import { Injectable } from "@angular/core";
-import {HttpClient} from "@angular/common/http";
+import { Injectable } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 
 import { throwError, Observable } from 'rxjs';
-import { catchError, map } from 'rxjs/operators'
-import {User} from "./User";
+import { catchError, map } from 'rxjs/operators';
+import {User} from './User';
 
 @Injectable()
 export class UserService {
@@ -13,7 +13,7 @@ export class UserService {
     constructor(
         private http: HttpClient,
     ) {
-        this.apiUrl = 'api/user'
+        this.apiUrl = 'api/user';
     }
 
     private handleError(error: any) {

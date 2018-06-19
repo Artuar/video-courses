@@ -8,16 +8,16 @@ import {Component, EventEmitter, Output} from '@angular/core';
 export class ToolboxComponent {
   @Output() search = new EventEmitter();
 
-  public searchString: string = '';
+  public searchString = '';
 
   constructor() { }
 
-  onSearch(){
+  onSearch() {
     this.search.emit(this.searchString);
     this.searchString = '';
   }
 
-  addCourse(){
+  addCourse() {
     console.log('Click on Add course');
   }
 }

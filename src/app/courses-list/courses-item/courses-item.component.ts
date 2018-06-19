@@ -1,5 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
-import {Course} from "../../../shared/courses-list/Course";
+import {Course} from '../shared/Course';
 
 @Component({
   selector: 'app-courses-item',
@@ -11,11 +11,11 @@ export class CoursesItemComponent {
 
   constructor() { }
 
-  edit(){
+  edit() {
     console.log(`Click on Edit ${this.course.title} course`);
   }
 
-  delete(){
+  delete() {
     console.log(`Click on Delete ${this.course.title} course`);
   }
 }

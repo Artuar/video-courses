@@ -1,9 +1,9 @@
-import { Injectable } from "@angular/core";
-import {HttpClient} from "@angular/common/http";
+import { Injectable } from '@angular/core';
+import {HttpClient} from '@angular/common/http';
 
 import { throwError, Observable } from 'rxjs';
-import { catchError, map } from 'rxjs/operators'
-import {Course} from "./Course";
+import { catchError, map } from 'rxjs/operators';
+import {Course} from './Course';
 
 @Injectable()
 export class CoursesService {
@@ -13,7 +13,7 @@ export class CoursesService {
   constructor(
     private http: HttpClient,
   ) {
-    this.apiUrl = 'api/courses'
+    this.apiUrl = 'api/courses';
   }
 
   private handleError(error: any) {
