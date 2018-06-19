@@ -4,12 +4,12 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { FooterComponent } from './footer/footer.component';
-import { BreadcrumbsComponent } from './breadcrumbs/breadcrumbs.component';
-import { HeaderComponent } from './header/header.component';
+import { FooterComponent } from './shared/components/footer/footer.component';
+import { BreadcrumbsComponent } from './shared/components/breadcrumbs/breadcrumbs.component';
+import { HeaderComponent } from './shared/components/header/header.component';
 import {CoursesListModule} from './courses-list/courses-list.module';
-import {InMemoryDataService} from './shared/InMemoryDbService';
-import {UserService} from './shared/user.service';
+import {InMemoryDataService} from './shared/services/InMemoryDbService';
+import {UserService} from './shared/components/header/user.service';
 import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({

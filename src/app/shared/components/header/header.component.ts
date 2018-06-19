@@ -1,5 +1,5 @@
 import {Component, Input} from '@angular/core';
-import {User} from '../shared/User';
+import {User} from './User';
 
 @Component({
   selector: 'app-header',
