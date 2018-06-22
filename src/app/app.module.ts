@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { FooterComponent } from './shared/components/footer/footer.component';
 import { BreadcrumbsComponent } from './shared/components/breadcrumbs/breadcrumbs.component';
 import { HeaderComponent } from './shared/components/header/header.component';
-import {CoursesListModule} from './courses-list/courses-list.module';
+import {CoursesPageModule} from './courses-list/courses-page.module';
 import {InMemoryDataService} from './shared/services/InMemoryDbService';
 import {UserService} from './shared/components/header/user.service';
 import {HttpClientModule} from '@angular/common/http';
@@ -22,7 +22,7 @@ import {HttpClientModule} from '@angular/common/http';
   imports: [
     BrowserModule,
     HttpClientModule,
-    CoursesListModule,
+    CoursesPageModule,
     AppRoutingModule,
 
     HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, { delay: 500 })

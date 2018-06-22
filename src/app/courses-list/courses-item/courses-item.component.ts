@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Course} from '../Course';
 
 @Component({
@@ -8,6 +8,7 @@ import {Course} from '../Course';
 })
 export class CoursesItemComponent {
   @Input() course: Course;
+  @Output() delete = new EventEmitter();
 
   constructor() { }
 
@@ -15,7 +16,7 @@ export class CoursesItemComponent {
     console.log(`Click on Edit ${this.course.title} course`);
   }
 
-  delete() {
-    console.log(`Click on Delete ${this.course.title} course`);
+  onDelete() {
+    this.delete.emit(this.course);
   }
 }

@@ -1,13 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import {Course} from './Course';
-import {CoursesService} from './courses-list.service';
+import {CoursesService} from './courses-page.service';
 
 @Component({
-  selector: 'app-courses-list',
-  templateUrl: './courses-list.component.html',
-  styleUrls: ['./courses-list.component.scss']
+  selector: 'app-courses-page',
+  templateUrl: './courses-page.component.html',
+  styleUrls: ['./courses-page.component.scss']
 })
-export class CoursesListComponent implements OnInit {
+export class CoursesPageComponent implements OnInit {
   public courses: Course[] = [];
   public loader = false;
 
@@ -31,10 +31,18 @@ export class CoursesListComponent implements OnInit {
         courses => {
           this.courses = courses;
           this.loader = false;
+          console.log('Courses list', this.courses);
         },
         () =>  {
-          this.courses = [];
           this.loader = false;
         });
+  }
+
+  onDeleteCourse(course: Course){
+    console.log(`Delete '${course.title}' course (id: '${course.id}')`);
+  }
+
+  loadMore(){
+    console.log(`Click on Load More`);
   }
 }

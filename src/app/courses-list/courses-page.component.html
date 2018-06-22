@@ -1,10 +1,14 @@
 <app-toolbox (search)="search($event)"></app-toolbox>
-<div class="course_list {{loader && 'loader'}}">
+<div class="courses-page {{loader && 'loader'}}">
   <app-courses-item
     *ngFor="let course of courses"
-    [course]="course">
+    [course]="course"
+    (delete)="onDeleteCourse($event)">
   </app-courses-item>
   <div class="not_found" *ngIf="courses.length === 0">
     Courses not found
+  </div>
+  <div class="load-more-button" (click)="loadMore()">
+    LOAD MORE
   </div>
 </div>

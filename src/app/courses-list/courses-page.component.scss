@@ -1,6 +1,6 @@
 @import '../../assets/styles/constants';
 
-.course_list{
+.courses-page{
   padding: 24px 12px;
   display: flex;
   flex-direction: column;
@@ -8,5 +8,8 @@
   max-width: 1080px;
   &.loader{
     @include blockWithPreloader('../../assets/images/rolling48px.svg');
+  }
+  .load-more-button{
+    @include button();
   }
 }
