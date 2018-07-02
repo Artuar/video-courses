@@ -31,12 +31,12 @@ describe('HeaderComponent', () => {
   it('logOff should be called', () => {
     spyOn(component, 'logOff');
 
-    let loadButton = fixture.debugElement.nativeElement.querySelector('.logOff');
+    const loadButton = fixture.debugElement.nativeElement.querySelector('.logOff');
     loadButton.click();
 
     fixture.whenStable().then(() => {
       expect(component.logOff).toHaveBeenCalled();
-    })
+    });
   });
 
 });

@@ -1,8 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { NO_ERRORS_SCHEMA} from "@angular/core";
+import { NO_ERRORS_SCHEMA} from '@angular/core';
 
 import { CoursesPageComponent } from './courses-page.component';
-import {CoursesService} from "./courses-page.service";
+import {CoursesService} from './courses-page.service';
 
 const TEST_VALUE = [
   {
@@ -46,12 +46,12 @@ describe('CoursesPageComponent', () => {
   it('loadMore should be called', () => {
     spyOn(component, 'loadMore');
 
-    let loadButton = fixture.debugElement.nativeElement.querySelector('.load_more_button');
+    const loadButton = fixture.debugElement.nativeElement.querySelector('.load_more_button');
     loadButton.click();
 
     fixture.whenStable().then(() => {
       expect(component.loadMore).toHaveBeenCalled();
-    })
+    });
   });
 
 });
