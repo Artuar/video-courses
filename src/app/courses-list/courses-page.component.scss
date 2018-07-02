@@ -9,7 +9,7 @@
   &.loader{
     @include blockWithPreloader('../../assets/images/rolling48px.svg');
   }
-  .load-more-button{
+  .load_more_button{
     @include button();
   }
 }

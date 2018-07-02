@@ -22,4 +22,21 @@ describe('HeaderComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('should render title in a h1 tag', async(() => {
+    const title = fixture.debugElement.nativeElement.querySelector('.title');
+    expect(title.textContent).toContain('Video courses');
+  }));
+
+  it('logOff should be called', () => {
+    spyOn(component, 'logOff');
+
+    let loadButton = fixture.debugElement.nativeElement.querySelector('.logOff');
+    loadButton.click();
+
+    fixture.whenStable().then(() => {
+      expect(component.logOff).toHaveBeenCalled();
+    })
+  });
+
 });

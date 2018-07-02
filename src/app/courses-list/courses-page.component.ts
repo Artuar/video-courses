@@ -16,33 +16,33 @@ export class CoursesPageComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.getCourses('');
+    this.getCourses();
   }
 
   search(searchString: string) {
     this.getCourses(searchString);
   }
 
-  getCourses(searchString: string) {
+  getCourses(searchString: string = '') {
     this.loader = true;
     this.coursesService
       .getCoursesList(searchString)
       .subscribe(
         courses => {
           this.courses = courses;
-          this.loader = false;
           console.log('Courses list', this.courses);
         },
         () =>  {
-          this.loader = false;
-        });
+          console.error('Error Courses list');
+        },
+        () => this.loader = false);
   }
 
-  onDeleteCourse(course: Course){
+  onDeleteCourse(course: Course) {
     console.log(`Delete '${course.title}' course (id: '${course.id}')`);
   }
 
-  loadMore(){
+  loadMore() {
     console.log(`Click on Load More`);
   }
 }

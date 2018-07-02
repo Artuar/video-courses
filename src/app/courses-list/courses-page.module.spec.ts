@@ -1,13 +1,13 @@
-import { CoursesListModule } from './courses-page.module';
+import { CoursesPageModule } from './courses-page.module';
 
-describe('CoursesListModule', () => {
-  let coursesListModule: CoursesListModule;
+describe('CoursesPageModule', () => {
+  let coursesListModule: CoursesPageModule;
 
   beforeEach(() => {
-    coursesListModule = new CoursesListModule();
+    coursesListModule = new CoursesPageModule();
   });
 
   it('should create an instance', () => {
-    expect(coursesListModule).toBeTruthy();
+    expect(CoursesPageModule).toBeTruthy();
   });
 });
