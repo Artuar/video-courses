@@ -24,7 +24,6 @@ const TEST_VALUE = [
 describe('CoursesPageComponent', () => {
   let component: CoursesPageComponent;
   let fixture: ComponentFixture<CoursesPageComponent>;
-  let service: CoursesService;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
