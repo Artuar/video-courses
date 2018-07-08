@@ -6,6 +6,9 @@ import { CoursesItemComponent } from './courses-item/courses-item.component';
 import {CoursesService} from './courses-page.service';
 import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule} from '@angular/forms';
+import {OrderByPipe} from './order-by.pipe';
+import {DurationFormatPipe} from './courses-item/duration-format.pipe';
+import {CourseHighlightDirective} from './courses-item/course-highlight.directive';
 
 @NgModule({
   imports:      [
@@ -16,7 +19,10 @@ import {FormsModule} from '@angular/forms';
   declarations: [
     ToolboxComponent,
     CoursesPageComponent,
-    CoursesItemComponent
+    CoursesItemComponent,
+    DurationFormatPipe,
+    OrderByPipe,
+    CourseHighlightDirective
   ],
   providers: [
     CoursesService

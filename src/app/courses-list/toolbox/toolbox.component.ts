@@ -7,6 +7,7 @@ import {Component, EventEmitter, Output} from '@angular/core';
 })
 export class ToolboxComponent {
   @Output() search = new EventEmitter();
+  @Output() add = new EventEmitter();
 
   public searchString = '';
 
@@ -18,6 +19,7 @@ export class ToolboxComponent {
   }
 
   addCourse() {
-    console.log('Click on Add course');
+    this.add.emit();
   }
+
 }

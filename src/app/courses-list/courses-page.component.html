@@ -1,14 +1,19 @@
-<app-toolbox (search)="search($event)"></app-toolbox>
-<div class="courses-page {{loader && 'loader'}}">
+<app-toolbox (search)="search($event)" (add)="addCourse($event)"></app-toolbox>
+<div class="courses-page" [ngClass]="{ loader: loader }">
   <app-courses-item
-    *ngFor="let course of courses"
+    *ngFor="let course of getCoursesList() | orderBy: 'creation_date'"
     [course]="course"
     (delete)="onDeleteCourse($event)">
   </app-courses-item>
-  <div class="not_found" *ngIf="courses.length === 0">
-    Courses not found
-  </div>
-  <div class="load_more_button" (click)="loadMore()">
-    LOAD MORE
-  </div>
+  <ng-template *ngIf="getCoursesList().length === 0; then thenBlock else elseBlock"></ng-template>
+  <ng-template #thenBlock>
+    <div class="not_found" (click)="addCourse()">
+      NO DATA, FEEL FREE TO ADD NEW COURSE
+    </div>
+  </ng-template>
+  <ng-template #elseBlock>
+    <div class="load_more_button" (click)="loadMore()">
+      LOAD MORE
+    </div>
+  </ng-template>
 </div>

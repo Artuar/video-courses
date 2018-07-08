@@ -3,13 +3,14 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CoursesItemComponent } from './courses-item.component';
 import {Component, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
 import {Course} from '../Course';
+import {DurationFormatPipe} from './duration-format.pipe';
 
 @Component({
   selector: 'app-courses-item-spec',
   template: '<app-courses-item [course]="course"></app-courses-item>'
 })
 class CoursesItemSpecComponent {
-  course = new Course(0, 'First', '12/01/2018', '1m', 'description');
+  course = new Course(0, 'First', 1527195600000, 1, 'description', false);
 }
 
 describe('CoursesItemComponent', () => {
@@ -20,7 +21,8 @@ describe('CoursesItemComponent', () => {
     TestBed.configureTestingModule({
       declarations: [
         CoursesItemSpecComponent,
-        CoursesItemComponent
+        CoursesItemComponent,
+        DurationFormatPipe
       ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
     })
