@@ -6,22 +6,20 @@ import { CoursesItemComponent } from './courses-item/courses-item.component';
 import {CoursesService} from './courses-page.service';
 import {BrowserModule} from '@angular/platform-browser';
 import {FormsModule} from '@angular/forms';
-import {OrderByPipe} from '../shared/pipes/order-by.pipe';
-import {DurationFormatPipe} from '../shared/pipes/duration-format.pipe';
 import {CourseHighlightDirective} from '../shared/directives/course-highlight.directive';
+import {PipesModule} from '../shared/pipes/pipes.module';
 
 @NgModule({
   imports:      [
     CommonModule,
     BrowserModule,
-    FormsModule
+    FormsModule,
+    PipesModule
   ],
   declarations: [
     ToolboxComponent,
     CoursesPageComponent,
     CoursesItemComponent,
-    DurationFormatPipe,
-    OrderByPipe,
     CourseHighlightDirective
   ],
   providers: [
