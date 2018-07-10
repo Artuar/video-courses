@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { CoursesItemComponent } from './courses-item.component';
 import {Component, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
-import {Course} from '../Course';
+import {Course, CourseClass} from '../Course';
 import {DurationFormatPipe} from '../../shared/pipes/duration-format.pipe';
 
 @Component({
@@ -10,7 +10,7 @@ import {DurationFormatPipe} from '../../shared/pipes/duration-format.pipe';
   template: '<app-courses-item [course]="course"></app-courses-item>'
 })
 class CoursesItemSpecComponent {
-  course = new Course(0, 'First', 1527195600000, 1, 'description', false);
+  course = new CourseClass(0, 'First', 1527195600000, 1, 'description', false);
 }
 
 describe('CoursesItemComponent', () => {
