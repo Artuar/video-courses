@@ -23,10 +23,6 @@ export class CoursesPageComponent implements OnInit {
     this.getCourses();
   }
 
-  getCoursesList(): Course[] {
-    return this.filteredCourses || this.courses;
-  }
-
   search(searchString: string) {
     // this.getCourses(searchString);
     this.filteredCourses = this.filterBy.transform(
@@ -47,6 +43,7 @@ export class CoursesPageComponent implements OnInit {
       .subscribe(
         courses => {
           this.courses = courses;
+          this.filteredCourses = courses;
           console.log('Courses list', this.courses);
         },
         () =>  {

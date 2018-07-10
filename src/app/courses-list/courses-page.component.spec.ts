@@ -4,7 +4,7 @@ import { NO_ERRORS_SCHEMA} from '@angular/core';
 import { CoursesPageComponent } from './courses-page.component';
 import {CoursesService} from './courses-page.service';
 import {HttpClient, HttpHandler} from '@angular/common/http';
-import {OrderByPipe} from './order-by.pipe';
+import {OrderByPipe} from '../shared/pipes/order-by.pipe';
 
 const TEST_VALUE = [
   {
@@ -55,7 +55,7 @@ describe('CoursesPageComponent', () => {
   it('noData should be called', () => {
     spyOn(component, 'addCourse');
 
-    component.courses = [];
+    component.filteredCourses = [];
     fixture.detectChanges();
 
     const loadButton = fixture.debugElement.nativeElement.querySelector('.not_found');
@@ -69,7 +69,7 @@ describe('CoursesPageComponent', () => {
   it('loadMore should be called', () => {
     spyOn(component, 'loadMore');
 
-    component.courses = TEST_VALUE;
+    component.filteredCourses = TEST_VALUE;
     fixture.detectChanges();
 
     const loadButton = fixture.debugElement.nativeElement.querySelector('.load_more_button');

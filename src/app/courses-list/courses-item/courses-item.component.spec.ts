@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CoursesItemComponent } from './courses-item.component';
 import {Component, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
 import {Course} from '../Course';
-import {DurationFormatPipe} from './duration-format.pipe';
+import {DurationFormatPipe} from '../../shared/pipes/duration-format.pipe';
 
 @Component({
   selector: 'app-courses-item-spec',

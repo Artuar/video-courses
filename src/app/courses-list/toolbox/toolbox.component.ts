@@ -15,7 +15,6 @@ export class ToolboxComponent {
 
   onSearch() {
     this.search.emit(this.searchString);
-    this.searchString = '';
   }
 
   addCourse() {

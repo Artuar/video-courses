@@ -1,11 +1,11 @@
 <app-toolbox (search)="search($event)" (add)="addCourse($event)"></app-toolbox>
 <div class="courses-page" [ngClass]="{ loader: loader }">
   <app-courses-item
-    *ngFor="let course of getCoursesList() | orderBy: 'creation_date'"
+    *ngFor="let course of filteredCourses| orderBy: 'creation_date'"
     [course]="course"
     (delete)="onDeleteCourse($event)">
   </app-courses-item>
-  <ng-template *ngIf="getCoursesList().length === 0; then thenBlock else elseBlock"></ng-template>
+  <ng-template *ngIf="filteredCourses.length === 0; then thenBlock else elseBlock"></ng-template>
   <ng-template #thenBlock>
     <div class="not_found" (click)="addCourse()">
       NO DATA, FEEL FREE TO ADD NEW COURSE
