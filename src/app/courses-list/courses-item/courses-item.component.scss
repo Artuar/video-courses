@@ -26,11 +26,12 @@
       padding-bottom: 6px;
       .title{
         .star{
+          width: 14px;
+          height: 14px;
+          display: inline-flex;
+          background: url(../../../assets/images/baseline-star_border-24px.svg) no-repeat center / 14px;
           &.topRated{
-            width: 14px;
-            height: 14px;
-            display: inline-flex;
-            background: url(../../../assets/images/baseline-star_border-24px.svg) no-repeat center / 14px;
+            background-image: url(../../../assets/images/baseline-star-24px.svg)
           }
         }
       }
