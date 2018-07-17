@@ -1,0 +1,39 @@
+@import '../../assets/styles/constants';
+
+.login-content{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .login{
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    box-shadow: 0 0 15px $grey;
+    margin-top: 25vh;
+    .title{
+      padding: 12px;
+      border-bottom: 1px solid $grey;
+      font-size: 18px;
+    }
+    .form{
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 12px;
+      .field{
+        padding: 12px;
+        input{
+          padding: 6px 12px;
+          width: 300px;
+        }
+      }
+      .login-button{
+        margin: 12px;
+        @include button();
+      }
+    }
+  }
+}
+

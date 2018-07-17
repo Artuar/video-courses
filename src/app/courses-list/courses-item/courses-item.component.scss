@@ -1,6 +1,6 @@
 @import '../../../assets/styles/constants';
 
-.courses_item{
+.courses_item, .courses_edit{
   background: $white;
   padding: 12px;
   box-shadow: 0 2px 3px 0 $grey;
@@ -18,6 +18,7 @@
   }
   .course_info{
     padding-right: 12px;
+    width: 100%;
     .course_data{
       display: flex;
       flex-direction: row;
@@ -35,9 +36,21 @@
           }
         }
       }
+      .time{
+        input.duration{
+          margin-right: 12px;
+          padding: 2px 0;
+          width: 50px;
+        }
+      }
     }
     .course_description{
       padding-top: 6px;
+      textarea{
+        width: 99%;
+        height: 70px;
+        resize: none;
+      }
     }
   }
   .course_actions{
@@ -45,7 +58,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    .delete, .edit{
+    &>div{
       @include button();
       margin: 3px 0;
     }

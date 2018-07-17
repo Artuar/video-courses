@@ -1,4 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, Input, Output} from '@angular/core';
 import {Course} from '../Course';
 
 @Component({
@@ -8,15 +8,29 @@ import {Course} from '../Course';
 })
 export class CoursesItemComponent {
   @Input() course: Course;
-  @Output() delete = new EventEmitter();
+  @Output() del = new EventEmitter();
+  @Output() edit = new EventEmitter();
+  @Output() save = new EventEmitter();
 
-  constructor() { }
+  constructor(  ) { }
 
-  edit() {
-    console.log(`Click on Edit ${this.course.title} course`);
+  onEdit($event) {
+    $event.stopPropagation();
+    this.edit.emit({course: this.course, isEdit: true});
   }
 
   onDelete() {
-    this.delete.emit(this.course);
+    this.del.emit(this.course);
   }
+
+  onSave(course) {
+    this.save.emit(course);
+  }
+
+  onCancel() {
+    this.edit.emit({course: this.course, isEdit: false});
+  }
+
+
+
 }

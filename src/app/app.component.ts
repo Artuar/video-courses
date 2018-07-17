@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {User} from './shared/components/header/User';
-import {UserService} from './shared/components/header/user.service';
+import {User} from './shared/services/User';
+import {UserService} from './shared/services/user.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -11,13 +12,22 @@ export class AppComponent implements OnInit {
   public user: User;
 
   constructor(
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) {}
 
   ngOnInit() {
-    this.userService
-      .getUserData()
-      .subscribe(user => this.user = user);
+    this.userService.getUserData()
+      .subscribe(
+        user => {
+          this.user = user;
+          if (!this.user.IsAuthenticated) {
+            this.router.navigateByUrl('login');
+          }
+        },
+        () =>  {
+          this.router.navigateByUrl('login');
+        });
   }
 
 }

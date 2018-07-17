@@ -1,0 +1,37 @@
+<ng-container *ngIf="course">
+  <div class="courses_edit" [appCourseHighlight]="editedCourse.creation_date">
+    <div class="course_info">
+      <div class="course_data">
+        <div class="title">
+          <input type="text"
+                 placeholder="Course title"
+                 [(ngModel)]="editedCourse.title"
+          />
+        </div>
+        <div class="time">
+          <input type="text"
+                 class="duration"
+                 placeholder="Course duration"
+                 value="{{editedCourse.duration }}"
+                 (change)="onChange($event, 'duration')"
+          />
+          <input type="date"
+                 value="{{editedCourse.creation_date | date: 'yyyy-MM-dd'}}"
+                 (change)="onChange($event, 'creation_date')"
+          />
+        </div>
+      </div>
+      <div class="course_description">
+          <textarea placeholder="Course description"
+                    [(ngModel)]="editedCourse.description"
+                    (ngModelChange)="onChange($event, 'description')">
+            {{course.description}}
+          </textarea>
+      </div>
+    </div>
+    <div class="course_actions">
+      <div class="cancel" (click)="onCancel()">Cancel</div>
+      <div class="save" (click)="onSave()">Save</div>
+    </div>
+  </div>
+</ng-container>

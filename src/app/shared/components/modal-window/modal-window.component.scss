@@ -1,0 +1,48 @@
+@import '../../../../assets/styles/constants';
+
+.modalWindow{
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background: rgba(0,0,0,0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .window{
+    width: 500px;
+    background: $white;
+    box-shadow: 0 0 12px 6px $grey;
+    display: flex;
+    flex-direction: column;
+    .head{
+      background: $darkBlue;
+      padding: 6px 12px;
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      color: $white;
+      .close{
+        cursor: pointer;
+      }
+    }
+    .message{
+      padding: 12px 12px;
+      text-align: center;
+    }
+    .buttonsBlock{
+      padding: 6px 12px;
+      display: flex;
+      justify-content: center;
+      .button{
+        padding: 6px 12px;
+        background: $darkBlue;
+        color: $white;
+        width: 30%;
+        text-align: center;
+        cursor: pointer;
+      }
+    }
+  }
+}

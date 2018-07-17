@@ -17,7 +17,8 @@ export class ToolboxComponent {
     this.search.emit(this.searchString);
   }
 
-  addCourse() {
+  addCourse($event) {
+    $event.stopPropagation();
     this.add.emit();
   }
 

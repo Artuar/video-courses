@@ -1,9 +1,13 @@
+<app-header></app-header>
+<app-breadcrumbs></app-breadcrumbs>
 <app-toolbox (search)="search($event)" (add)="addCourse($event)"></app-toolbox>
 <div class="courses-page" *ngIf="filteredCourses" [ngClass]="{ loader: loader }">
   <app-courses-item
     *ngFor="let course of filteredCourses| orderBy: 'creation_date'"
     [course]="course"
-    (delete)="onDeleteCourse($event)">
+    (del)="onDeleteCourse($event)"
+    (save)="onSaveCourse($event)"
+    (edit)="onEditCourse($event)">
   </app-courses-item>
   <ng-template *ngIf="filteredCourses.length === 0; then thenBlock else elseBlock"></ng-template>
   <ng-template #thenBlock>
@@ -16,4 +20,5 @@
       LOAD MORE
     </div>
   </ng-template>
+  <app-modal-window></app-modal-window>
 </div>

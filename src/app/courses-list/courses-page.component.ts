@@ -1,7 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Course} from './Course';
-import {CoursesService} from './courses-page.service';
+import {CoursesService} from './courses.service';
 import {FilterByPipe} from './filter-by.pipe';
+import {ToolboxComponent} from './toolbox/toolbox.component';
+import {ModalWindowComponent} from '../shared/components/modal-window/modal-window.component';
 
 @Component({
   selector: 'app-courses-page',
@@ -10,6 +12,9 @@ import {FilterByPipe} from './filter-by.pipe';
   providers: [ FilterByPipe ]
 })
 export class CoursesPageComponent implements OnInit {
+  @ViewChild(ToolboxComponent) toolBox: ToolboxComponent;
+  @ViewChild(ModalWindowComponent) modal: ModalWindowComponent;
+
   public courses: Course[] = [];
   public filteredCourses: Course[];
   public loader = false;
@@ -20,6 +25,18 @@ export class CoursesPageComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.coursesService.coursesSubject
+      .subscribe(
+        courses => {
+          this.courses = courses;
+          this.toolBox.onSearch();
+          console.log('Courses', courses);
+          this.loader = false;
+        },
+        () =>  {
+          console.error('Error');
+          this.loader = false;
+        });
     this.getCourses();
   }
 
@@ -33,27 +50,47 @@ export class CoursesPageComponent implements OnInit {
   }
 
   addCourse() {
-    console.log('Click on Add course');
+    const newCourse = {
+      title: '',
+      duration: 0,
+      description: '',
+      edit: true,
+      new_course: true
+    };
+    this.filteredCourses.unshift(newCourse as Course);
   }
 
-  private getCourses(searchString: string = '') {
+  private getCourses() {
     this.loader = true;
-    this.coursesService
-      .getCoursesList(searchString)
-      .subscribe(
-        courses => {
-          this.courses = courses;
-          this.filteredCourses = courses;
-          console.log('Courses list', this.courses);
-        },
-        () =>  {
-          console.error('Error Courses list');
-        },
-        () => this.loader = false);
+    this.coursesService.getCoursesList();
   }
 
   onDeleteCourse(course: Course) {
-    console.log(`Delete '${course.title}' course (id: '${course.id}')`);
+    this.modal.show({
+      title: `Delete course`,
+      message: `Do you really want to delete course '${course.title}'?`,
+      buttonText: 'Delete',
+      buttonAction: () => {
+        this.coursesService.deleteCourse(course.id);
+      }
+    });
+  }
+
+  onEditCourse({course, isEdit}) {
+    if (course.new_course && !isEdit) {
+      this.filteredCourses = this.filteredCourses.filter(filteredCourse =>
+        course.id !== filteredCourse.id
+      );
+    } else {
+      this.filteredCourses.forEach(filteredCourse => {
+        filteredCourse.edit = course.id === filteredCourse.id && isEdit;
+      });
+    }
+  }
+
+  onSaveCourse(course) {
+    this.loader = true;
+    this.coursesService.saveCourse(course);
   }
 
   loadMore() {

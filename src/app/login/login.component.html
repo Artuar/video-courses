@@ -1,0 +1,21 @@
+<app-header></app-header>
+<div class="login-content">
+  <div class="login">
+    <div class="title">
+      Login
+    </div>
+    <div class="form">
+      <div class="field email">
+        <input type="text" placeholder="Email" [(ngModel)]="email">
+      </div>
+      <div class="field password">
+        <input type="password" placeholder="Password" [(ngModel)]="password">
+      </div>
+      <div class="login-button" (click)="login()">
+        Login
+      </div>
+    </div>
+  </div>
+</div>
+
+

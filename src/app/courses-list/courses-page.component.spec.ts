@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA} from '@angular/core';
 
 import { CoursesPageComponent } from './courses-page.component';
-import {CoursesService} from './courses-page.service';
+import {CoursesService} from './courses.service';
 import {HttpClient, HttpHandler} from '@angular/common/http';
 import {OrderByPipe} from '../shared/pipes/order-by.pipe';
 
@@ -58,21 +58,19 @@ describe('CoursesPageComponent', () => {
     component.filteredCourses = [];
     fixture.detectChanges();
 
-    const loadButton = fixture.debugElement.nativeElement.querySelector('.not_found');
+    let loadButton = fixture.debugElement.nativeElement.querySelector('.not_found');
     loadButton.click();
 
     fixture.whenStable().then(() => {
       expect(component.addCourse).toHaveBeenCalled();
     });
-  });
 
-  it('loadMore should be called', () => {
     spyOn(component, 'loadMore');
 
     component.filteredCourses = TEST_VALUE;
     fixture.detectChanges();
 
-    const loadButton = fixture.debugElement.nativeElement.querySelector('.load_more_button');
+    loadButton = fixture.debugElement.nativeElement.querySelector('.load_more_button');
     loadButton.click();
 
     fixture.whenStable().then(() => {

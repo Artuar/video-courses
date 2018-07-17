@@ -16,6 +16,7 @@ describe('ToolboxComponent', () => {
 
     fixture = TestBed.createComponent(ToolboxComponent);
     component = fixture.componentInstance;
+    console.log(component);
   }));
 
   it('should create', () => {

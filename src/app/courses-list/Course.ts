@@ -1,10 +1,12 @@
 export interface Course {
-  id: number;
+  id?: number;
   title: string;
   creation_date: number;
   duration: number;
   description: string;
   top_rated: boolean;
+  edit?: boolean;
+  new_course?: boolean;
 }
 
 export class CourseClass implements Course {

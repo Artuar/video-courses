@@ -1,0 +1,16 @@
+<div class="modalWindow" *ngIf="modalProps">
+  <div class="window">
+    <div class="head">
+      <div class="title">{{ modalProps.title }}</div>
+      <div class="close" (click)="hide()">X</div>
+    </div>
+    <div class="message">{{ modalProps.message }}</div>
+    <div class="buttonsBlock">
+      <div class="button"
+           *ngIf="modalProps.buttonAction"
+           (click)="submit()">
+        {{ modalProps.buttonText || 'Submit'}}
+      </div>
+    </div>
+  </div>
+</div>
