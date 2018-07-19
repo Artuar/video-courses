@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import {Subject} from 'rxjs';
+import {BehaviorSubject, Subject} from 'rxjs';
 import {Course, CourseClass} from './Course';
 
 const COURSES_LIST = [
@@ -45,15 +45,15 @@ const COURSES_LIST = [
 export class CoursesService {
   private coursesList: Course[];
 
-  public coursesSubject: Subject<Course[]> = new Subject();
+  private coursesSubject: BehaviorSubject<Course[]>;
 
   constructor() {
     this.coursesList = COURSES_LIST;
-
   }
 
   public getCoursesList() {
-    this.coursesSubject.next(this.coursesList);
+    this.coursesSubject = new BehaviorSubject(this.coursesList);
+    return this.coursesSubject;
   }
 
   public deleteCourse(id: number) {

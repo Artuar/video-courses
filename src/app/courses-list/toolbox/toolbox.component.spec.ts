@@ -1,48 +1,40 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { ToolboxComponent } from './toolbox.component';
-import {NO_ERRORS_SCHEMA} from '@angular/core';
+import {Component, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core';
+
+@Component({
+  selector: 'app-toolbox-spec',
+  template: '<app-toolbox (search)="search()" (add)="add()"></app-toolbox>'
+})
+class ToolboxSpecComponent {
+  search(){}
+  add(){}
+}
 
 describe('ToolboxComponent', () => {
   let component: ToolboxComponent;
-  let fixture: ComponentFixture<ToolboxComponent>;
+  let fixture: ComponentFixture<ToolboxSpecComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ToolboxComponent ],
-      schemas: [NO_ERRORS_SCHEMA]
+      declarations: [
+        ToolboxSpecComponent,
+        ToolboxComponent
+      ],
+      schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA]
     })
-    .compileComponents();
-
-    fixture = TestBed.createComponent(ToolboxComponent);
-    component = fixture.componentInstance;
-    console.log(component);
+      .compileComponents();
   }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(ToolboxSpecComponent);
+    component = fixture.debugElement.children[0].componentInstance;
+    fixture.detectChanges();
+  });
 
   it('should create', () => {
     expect(component).toBeTruthy();
-  });
-
-  it('onSearch should be called', () => {
-    spyOn(component, 'onSearch');
-
-    const button = fixture.debugElement.nativeElement.querySelector('.search_button');
-    button.click();
-
-    fixture.whenStable().then(() => {
-      expect(component.onSearch).toHaveBeenCalled();
-    });
-  });
-
-  it('addCourse should be called', () => {
-    spyOn(component, 'addCourse');
-
-    const button = fixture.debugElement.nativeElement.querySelector('.add_course');
-    button.click();
-
-    fixture.whenStable().then(() => {
-      expect(component.addCourse).toHaveBeenCalled();
-    });
   });
 
 });

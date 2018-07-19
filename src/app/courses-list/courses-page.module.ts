@@ -10,14 +10,12 @@ import {PipesModule} from '../shared/pipes/pipes.module';
 import {ModalWindowComponent} from '../shared/components/modal-window/modal-window.component';
 import {CoursesEditComponent} from './courses-item/courses-edit/courses-edit.component';
 import {BreadcrumbsComponent} from '../shared/components/breadcrumbs/breadcrumbs.component';
-import {CoreModule} from '../core/core.module';
 
 @NgModule({
   imports:      [
     CommonModule,
     FormsModule,
-    PipesModule,
-    CoreModule
+    PipesModule
   ],
   declarations: [
     BreadcrumbsComponent,

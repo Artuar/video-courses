@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {ActivatedRoute, Router} from '@angular/router';
+import {Router} from '@angular/router';
 import {UserService} from '../shared/services/user.service';
 
 @Component({
@@ -13,19 +13,14 @@ export class LoginComponent {
   public password: string;
 
   constructor(
-    private route: ActivatedRoute,
     private router: Router,
     private userService: UserService
-  ) {
-    this.route.data.subscribe(data => this.title = data.title);
-  }
+  ) { }
 
   login() {
     this.userService.login()
-      .subscribe(data => {
-        if (data['IsAuthenticated']) {
-          this.router.navigateByUrl('');
-        }
+      .subscribe((data) => {
+        this.router.navigateByUrl('');
       });
   }
 

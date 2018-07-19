@@ -1,17 +1,18 @@
 import {UserService} from './user.service';
-import {HeaderComponent} from '../../core/header/header.component';
+import {HeaderComponent} from '../components/header/header.component';
 import {Router} from '@angular/router';
+import {HttpClient} from "@angular/common/http";
 
 describe('Component: Login', () => {
 
   let component: HeaderComponent;
   let service: UserService;
   // tslint:disable-next-line
-  let router: Router;
+  let http: HttpClient;
 
   beforeEach(() => {
-    service = new UserService();
-    component = new HeaderComponent(service, router);
+    service = new UserService(http);
+    component = new HeaderComponent();
   });
 
   afterEach(() => {
@@ -25,12 +26,4 @@ describe('Component: Login', () => {
     expect(component.user).toBeFalsy();
   });
 
-  it('true when the user is authenticated', () => {
-    localStorage.setItem(
-      'video-courses',
-      '{"id":100500,"firstName":"Artur","lastName":"Rieznik","IsAuthenticated":true}'
-    );
-    component.ngOnInit();
-    expect(component.user).toBeTruthy();
-  });
 });

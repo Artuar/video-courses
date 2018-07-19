@@ -1,8 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { HeaderComponent } from './header.component';
-import {User} from '../../shared/services/User';
-import {UserService} from '../../shared/services/user.service';
+import {User} from '../../services/User';
+import {UserService} from '../../services/user.service';
 import {Router} from '@angular/router';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
 

@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {CoursesPageComponent} from './courses-list/courses-page.component';
 import {LoginComponent} from './login/login.component';
+import {AuthGuardService} from './shared/services/auth-guard.service';
 
 const routes: Routes = [
   {
@@ -12,7 +13,8 @@ const routes: Routes = [
   {
     path: '',
     component: CoursesPageComponent,
-    data: { title: 'Video courses' }
+    data: { title: 'Video courses' },
+    canActivate: [AuthGuardService]
   }
 ];
 

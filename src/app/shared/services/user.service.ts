@@ -5,55 +5,61 @@ import {throwError, Observable, Subject} from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import {User} from './User';
 
-const USER = {
-  id: 100500,
-  firstName: 'Artur',
-  lastName: 'Rieznik',
-  IsAuthenticated: true
-};
-
 @Injectable()
 export class UserService {
 
-    private userData: User;
+  private userData: User;
 
-    constructor() { }
+  private apiUrl: string;
 
-    public getUserData(): Observable<User> {
-      const localData = window.localStorage['video-courses'];
-      if (localData)  {
-        try {
-          const data = JSON.parse(localData);
-          const isAuth = data.IsAuthenticated;
-          if (isAuth) {
-            this.userData = data;
-            return new Observable((observer) => {
-              observer.next(USER as User);
-              observer.complete();
-            });
-          }
-        } catch (e) {}
+  constructor(
+    private http: HttpClient,
+  ) {
+    this.apiUrl = 'api/user';
+  }
+
+  private handleError(error: any) {
+    console.error('Error', error);
+    return throwError(error.message || error);
+  }
+
+  getUserData(): Observable<User> {
+    return this.http.get(this.apiUrl)
+      .pipe(
+        map(response => response as User),
+        catchError(this.handleError)
+      );
+  }
+
+  login(): Observable<{}> {
+    window.localStorage['video-courses'] = JSON.stringify({IsAuthenticated: true});
+    return new Observable((observer) => {
+      observer.next({IsAuthenticated: true});
+      observer.complete();
+    });
+  }
+
+  logout(): Observable<{}> {
+    window.localStorage['video-courses'] = JSON.stringify({IsAuthenticated: false});
+    return new Observable((observer) => {
+      observer.next({IsAuthenticated: false});
+      observer.complete();
+    });
+  }
+
+  isLogin(): boolean {
+    const localData = window.localStorage['video-courses'];
+    let data;
+    console.log('localData', localData);
+    if (localData)  {
+      try {
+        data = JSON.parse(localData);
+        console.log(data);
+      } catch (e) {
+        delete window.localStorage['video-courses'];
       }
-      return new Observable((observer) => {
-        observer.next(Object.assign(this.userData || {}, {IsAuthenticated: false})  as User);
-        observer.complete();
-      });
     }
-
-    login(): Observable<User> {
-      window.localStorage['video-courses'] = JSON.stringify(USER);
-      return new Observable((observer) => {
-        observer.next(USER as User);
-        observer.complete();
-      });
-    }
-
-    logOut(): Observable<User> {
-      delete window.localStorage['video-courses'];
-      return new Observable((observer) => {
-        observer.next(Object.assign(this.userData, {IsAuthenticated: false}));
-        observer.complete();
-      });
-    }
+    return data.IsAuthenticated;
+  }
 
 }

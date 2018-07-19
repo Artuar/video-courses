@@ -25,7 +25,9 @@ export class CoursesPageComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.coursesService.coursesSubject
+    this.loader = true;
+    this.coursesService
+      .getCoursesList()
       .subscribe(
         courses => {
           this.courses = courses;
@@ -37,7 +39,6 @@ export class CoursesPageComponent implements OnInit {
           console.error('Error');
           this.loader = false;
         });
-    this.getCourses();
   }
 
   search(searchString: string) {
@@ -58,11 +59,6 @@ export class CoursesPageComponent implements OnInit {
       new_course: true
     };
     this.filteredCourses.unshift(newCourse as Course);
-  }
-
-  private getCourses() {
-    this.loader = true;
-    this.coursesService.getCoursesList();
   }
 
   onDeleteCourse(course: Course) {

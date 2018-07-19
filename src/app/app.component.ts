@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {User} from './shared/services/User';
 import {UserService} from './shared/services/user.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -14,20 +14,29 @@ export class AppComponent implements OnInit {
   constructor(
     private userService: UserService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit() {
-    this.userService.getUserData()
-      .subscribe(
-        user => {
-          this.user = user;
-          if (!this.user.IsAuthenticated) {
-            this.router.navigateByUrl('login');
-          }
-        },
-        () =>  {
-          this.router.navigateByUrl('login');
-        });
+    this.router.events.subscribe( (event) => {
+      if (event instanceof NavigationEnd) {
+        if (!this.userService.isLogin()) {
+          this.user = null;
+        } else if (!this.user) {
+          this.userService.getUserData()
+            .subscribe(
+              user => {
+                this.user = user;
+              });
+        }
+      }
+    });
+  }
+
+  logout() {
+    this.userService.logout()
+      .subscribe(() => {
+        this.router.navigateByUrl('login');
+      });
   }
 
 }
