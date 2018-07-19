@@ -59,7 +59,7 @@ export class UserService {
         delete window.localStorage['video-courses'];
       }
     }
-    return data.IsAuthenticated;
+    return data && data.IsAuthenticated;
   }
 
 }

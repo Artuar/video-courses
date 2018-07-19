@@ -10,12 +10,14 @@ import {PipesModule} from '../shared/pipes/pipes.module';
 import {ModalWindowComponent} from '../shared/components/modal-window/modal-window.component';
 import {CoursesEditComponent} from './courses-item/courses-edit/courses-edit.component';
 import {BreadcrumbsComponent} from '../shared/components/breadcrumbs/breadcrumbs.component';
+import {SharedModule} from '../shared/shared.module';
 
 @NgModule({
   imports:      [
     CommonModule,
     FormsModule,
-    PipesModule
+    PipesModule,
+    SharedModule
   ],
   declarations: [
     BreadcrumbsComponent,

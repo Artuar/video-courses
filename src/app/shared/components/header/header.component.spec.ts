@@ -5,6 +5,7 @@ import {User} from '../../services/User';
 import {UserService} from '../../services/user.service';
 import {Router} from '@angular/router';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
+import {HttpClient, HttpHandler} from "@angular/common/http";
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -15,6 +16,8 @@ describe('HeaderComponent', () => {
       declarations: [ HeaderComponent ],
       providers: [
         UserService,
+        HttpClient,
+        HttpHandler,
         {
           provide: Router,
           useClass: class { navigate = jasmine.createSpy('navigate'); }
@@ -42,7 +45,7 @@ describe('HeaderComponent', () => {
   it('logOff should be called', () => {
     spyOn(component, 'logOff');
 
-    component.user = {id: 1, firstName: 'Test', lastName: '', IsAuthenticated: true} as User;
+    component.user = {id: 1, firstName: 'Test', lastName: ''} as User;
     fixture.detectChanges();
 
     const loadButton = fixture.debugElement.nativeElement.querySelector('.logOff');

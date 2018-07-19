@@ -8,8 +8,8 @@ import {Component, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA} from '@angular/core
   template: '<app-toolbox (search)="search()" (add)="add()"></app-toolbox>'
 })
 class ToolboxSpecComponent {
-  search(){}
-  add(){}
+  search() {}
+  add() {}
 }
 
 describe('ToolboxComponent', () => {

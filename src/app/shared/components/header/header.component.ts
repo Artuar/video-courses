@@ -1,19 +1,36 @@
-import {Component, EventEmitter, Input, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {User} from '../../services/User';
+import {UserService} from '../../services/user.service';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent {
-  @Input() user: User;
-  @Output() logout = new EventEmitter();
+export class HeaderComponent implements OnInit {
+  public user: User;
 
-  constructor() { }
+  constructor(
+    private userService: UserService,
+    private router: Router
+  ) { }
+
+  ngOnInit() {
+    if (this.userService.isLogin()) {
+      this.userService.getUserData()
+        .subscribe(
+          user => {
+            this.user = user;
+          });
+    }
+  }
 
   logOff() {
-    this.logout.emit();
+    this.userService.logout()
+      .subscribe(() => {
+        this.router.navigateByUrl('login');
+      });
   }
 
 }
