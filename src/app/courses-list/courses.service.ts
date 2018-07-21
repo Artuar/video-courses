@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import {BehaviorSubject, Subject} from 'rxjs';
+import {BehaviorSubject, Observable, Subject} from 'rxjs';
 import {Course, CourseClass} from './Course';
 
 const COURSES_LIST = [
@@ -49,11 +49,18 @@ export class CoursesService {
 
   constructor() {
     this.coursesList = COURSES_LIST;
+    this.coursesSubject = new BehaviorSubject(this.coursesList);
   }
 
   public getCoursesList() {
-    this.coursesSubject = new BehaviorSubject(this.coursesList);
     return this.coursesSubject;
+  }
+
+  public getCourseById(id: number): Observable<Course> {
+    return new Observable((observer) => {
+      observer.next(this.coursesList.filter(course => course.id === id)[0]);
+      observer.complete();
+    });
   }
 
   public deleteCourse(id: number) {
@@ -62,6 +69,7 @@ export class CoursesService {
   }
 
   public saveCourse(courseProps)  {
+    console.log('courseProps', courseProps);
     if (this.coursesList.some(course => course.id === courseProps.id)) {
       this.coursesList.forEach((course, index) => {
         if (course.id === courseProps.id) {
@@ -72,10 +80,11 @@ export class CoursesService {
       const newCourse = new CourseClass(
         new Date().getTime(),
         courseProps.title,
-        new Date().getTime(),
+        courseProps.creation_date,
         courseProps.duration,
         courseProps.description,
         Math.random() < 0.5,
+        courseProps.authors
       );
       this.coursesList.push(newCourse);
     }

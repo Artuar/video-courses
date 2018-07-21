@@ -1,13 +1,13 @@
-@import '../../assets/styles/constants';
+@import '../../../assets/styles/constants';
 
-.courses-page{
+.courses-list{
   padding: 24px 12px;
   display: flex;
   flex-direction: column;
   margin: auto;
   max-width: 1080px;
   &.loader{
-    @include blockWithPreloader('../../assets/images/rolling48px.svg');
+    @include blockWithPreloader('../../../assets/images/rolling48px.svg');
   }
   .load_more_button, .not_found{
     @include button();

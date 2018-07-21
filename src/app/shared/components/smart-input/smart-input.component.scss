@@ -1,0 +1,30 @@
+@import '../../../../assets/styles/constants';
+
+.smart-input{
+  display: flex;
+  //justify-content: space-between;
+  flex-wrap: wrap;
+  background: white;
+  padding: 3px;
+  border: 1px solid #ccc;
+  .item{
+    background: #0049A0;
+    color: #FFFFFF;
+    margin: 1px;
+    padding-right: 3px;
+    padding-left: 3px;
+    display: flex;
+    justify-content: space-between;
+    .remove{
+      font-weight: bold;
+      font-size: 10px;
+      margin-left: 10px;
+      cursor: pointer;
+    }
+  }
+  input{
+    border: none;
+    outline: none;
+    flex: 1;
+  }
+}

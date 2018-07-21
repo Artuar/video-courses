@@ -1,4 +1,4 @@
-@import '../../../assets/styles/constants';
+@import '../../../../assets/styles/constants';
 
 .courses_item, .courses_edit{
   background: $white;
@@ -30,9 +30,9 @@
           width: 14px;
           height: 14px;
           display: inline-flex;
-          background: url(../../../assets/images/baseline-star_border-24px.svg) no-repeat center / 14px;
+          background: url(../../../../assets/images/baseline-star_border-24px.svg) no-repeat center / 14px;
           &.topRated{
-            background-image: url(../../../assets/images/baseline-star-24px.svg)
+            background-image: url(../../../../assets/images/baseline-star-24px.svg)
           }
         }
       }
@@ -50,6 +50,15 @@
         width: 99%;
         height: 70px;
         resize: none;
+      }
+    }
+    .course_authors{
+      font-size: 12px;
+      color: grey;
+      display: flex;
+      margin-top: 12px;
+      .author{
+        margin-right: 3px;
       }
     }
   }

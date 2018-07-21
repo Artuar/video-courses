@@ -1,5 +1,5 @@
 import {Component, ElementRef, EventEmitter, HostListener, Input, OnInit, Output, ViewChild} from '@angular/core';
-import {Course} from '../../Course';
+import {Course} from '../../../Course';
 
 @Component({
   selector: 'app-courses-edit',

@@ -1,0 +1,43 @@
+<div class="courses_edit" *ngIf="course">
+  <div class="head">New course</div>
+  <div class="course_info">
+    <div class="title">
+      <label>Title:</label>
+      <input type="text"
+             placeholder="Course title"
+             [(ngModel)]="course.title"/>
+    </div>
+    <div class="description">
+      <label>Description:</label>
+          <textarea placeholder="Course description"
+                    [(ngModel)]="course.description"
+                    (ngModelChange)="onChange($event, 'description')"
+          >{{course.description}}</textarea>
+    </div>
+    <div class="duration">
+      <label>Duration:</label>
+      <input type="text"
+             class="duration"
+             placeholder="Course duration"
+             value="{{course.duration }}"
+             (change)="onChange($event, 'duration')"/>
+    </div>
+    <div class="date">
+      <label>Date:</label>
+      <input type="date"
+             value="{{course.creation_date | date: 'yyyy-MM-dd'}}"
+             (change)="onChange($event, 'creation_date')"/>
+    </div>
+    <div class="authors">
+      <label>Authors:</label>
+      <app-smart-input
+        [list]="course.authors || []"
+        (change)="onChange($event, 'authors')">
+      </app-smart-input>
+    </div>
+  </div>
+  <div class="course_actions">
+    <div class="cancel" (click)="onCancel()">Cancel</div>
+    <div class="save" (click)="onSave()">Save</div>
+  </div>
+</div>

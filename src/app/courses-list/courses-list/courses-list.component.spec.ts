@@ -1,10 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { NO_ERRORS_SCHEMA} from '@angular/core';
 
-import { CoursesPageComponent } from './courses-page.component';
-import {CoursesService} from './courses.service';
+import { CoursesListComponent } from './courses-list.component';
+import {CoursesService} from '../courses.service';
 import {HttpClient, HttpHandler} from '@angular/common/http';
-import {OrderByPipe} from '../shared/pipes/order-by.pipe';
+import {OrderByPipe} from '../../shared/pipes/order-by.pipe';
 
 const TEST_VALUE = [
   {
@@ -26,13 +26,13 @@ const TEST_VALUE = [
 ];
 
 describe('CoursesPageComponent', () => {
-  let component: CoursesPageComponent;
-  let fixture: ComponentFixture<CoursesPageComponent>;
+  let component: CoursesListComponent;
+  let fixture: ComponentFixture<CoursesListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        CoursesPageComponent,
+        CoursesListComponent,
         OrderByPipe
       ],
       providers: [
@@ -44,7 +44,7 @@ describe('CoursesPageComponent', () => {
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(CoursesPageComponent);
+    fixture = TestBed.createComponent(CoursesListComponent);
     component = fixture.componentInstance;
   }));
 

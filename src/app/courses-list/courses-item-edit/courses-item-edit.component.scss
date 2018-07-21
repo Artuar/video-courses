@@ -1,0 +1,34 @@
+@import '../../../assets/styles/constants';
+
+.courses_edit{
+  box-shadow: 0 0 12px $grey;
+  padding: 24px 12px;
+  display: flex;
+  flex-direction: column;
+  margin: 24px auto;
+  width: 540px;
+  .head{
+    font-weight: bold;
+  }
+  .course_info{
+    &>div{
+      padding: 12px 0;
+      display: flex;
+      flex-direction: column;
+      textarea{
+        resize: none;
+        height: 50px;
+      }
+    }
+  }
+  .course_actions{
+    padding: 12px 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    &>div{
+      @include button();
+      margin-right: 12px;
+    }
+  }
+}

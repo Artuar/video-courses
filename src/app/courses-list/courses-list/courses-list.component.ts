@@ -1,17 +1,18 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {Course} from './Course';
-import {CoursesService} from './courses.service';
-import {FilterByPipe} from './filter-by.pipe';
+import {Course} from '../Course';
+import {CoursesService} from '../courses.service';
+import {FilterByPipe} from '../filter-by.pipe';
 import {ToolboxComponent} from './toolbox/toolbox.component';
-import {ModalWindowComponent} from '../shared/components/modal-window/modal-window.component';
+import {ModalWindowComponent} from '../../shared/components/modal-window/modal-window.component';
+import {Router} from "@angular/router";
 
 @Component({
-  selector: 'app-courses-page',
-  templateUrl: './courses-page.component.html',
-  styleUrls: ['./courses-page.component.scss'],
+  selector: 'app-courses-list',
+  templateUrl: './courses-list.component.html',
+  styleUrls: ['./courses-list.component.scss'],
   providers: [ FilterByPipe ]
 })
-export class CoursesPageComponent implements OnInit {
+export class CoursesListComponent implements OnInit {
   @ViewChild(ToolboxComponent) toolBox: ToolboxComponent;
   @ViewChild(ModalWindowComponent) modal: ModalWindowComponent;
 
@@ -21,7 +22,8 @@ export class CoursesPageComponent implements OnInit {
 
   constructor(
     private coursesService: CoursesService,
-    private filterBy: FilterByPipe
+    private filterBy: FilterByPipe,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -51,14 +53,15 @@ export class CoursesPageComponent implements OnInit {
   }
 
   addCourse() {
-    const newCourse = {
-      title: '',
-      duration: 0,
-      description: '',
-      edit: true,
-      new_course: true
-    };
-    this.filteredCourses.unshift(newCourse as Course);
+    // const newCourse = {
+    //   title: '',
+    //   duration: 0,
+    //   description: '',
+    //   edit: true,
+    //   new_course: true
+    // };
+    // this.filteredCourses.unshift(newCourse as Course);
+    this.router.navigateByUrl('courses/new')
   }
 
   onDeleteCourse(course: Course) {

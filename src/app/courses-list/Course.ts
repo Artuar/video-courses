@@ -7,6 +7,7 @@ export interface Course {
   top_rated: boolean;
   edit?: boolean;
   new_course?: boolean;
+  authors?: string[];
 }
 
 export class CourseClass implements Course {
@@ -16,6 +17,7 @@ export class CourseClass implements Course {
     public creation_date: number,
     public duration: number,
     public description: string,
-    public top_rated: boolean
+    public top_rated: boolean,
+    public authors?: string[]
   ) {  }
 }

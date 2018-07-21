@@ -16,6 +16,9 @@
         <div class="course_description">
           {{course.description}}
         </div>
+        <div *ngIf="course.authors" class="course_authors">
+          <div *ngFor="let author of course.authors" class="author">{{author}}</div>
+        </div>
       </div>
       <div class="course_actions">
         <div class="edit" (click)="onEdit($event)">Edit</div>

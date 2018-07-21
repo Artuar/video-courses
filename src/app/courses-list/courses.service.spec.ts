@@ -1,5 +1,5 @@
 import {CoursesService} from './courses.service';
-import {CoursesPageComponent} from './courses-page.component';
+import {CoursesPageComponent} from './courses-list/courses-list.component';
 import {FilterByPipe} from './filter-by.pipe';
 
 describe('Component: Login', () => {
