@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {ActivatedRoute, Router} from "@angular/router";
-import {CoursesService} from "../courses.service";
-import {Course} from "../Course";
+import {ActivatedRoute, Router} from '@angular/router';
+import {CoursesService} from '../courses.service';
+import {Course} from '../Course';
 
 @Component({
   selector: 'app-courses-item-edit',
@@ -23,7 +23,7 @@ export class CoursesItemEditComponent implements OnInit {
   }
 
   ngOnInit() {
-    if(this.id !== 'new'){
+    if (this.id !== 'new') {
       console.log(this.id);
 
       this.coursesService
@@ -56,13 +56,12 @@ export class CoursesItemEditComponent implements OnInit {
   }
 
   onSave() {
-    console.log('this.course', this.course);
     this.coursesService.saveCourse(this.course);
-    this.onCancel()
+    this.onCancel();
   }
 
-  onCancel(){
-    this.router.navigateByUrl('course')
+  onCancel() {
+    this.router.navigateByUrl('course');
   }
 
 }

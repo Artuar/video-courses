@@ -31,7 +31,7 @@
     <div class="authors">
       <label>Authors:</label>
       <app-smart-input
-        [list]="course.authors || []"
+        [startList]="course.authors"
         (change)="onChange($event, 'authors')">
       </app-smart-input>
     </div>

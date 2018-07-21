@@ -5,7 +5,7 @@ import {User} from '../../services/User';
 import {UserService} from '../../services/user.service';
 import {Router} from '@angular/router';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
-import {HttpClient, HttpHandler} from "@angular/common/http";
+import {HttpClient, HttpHandler} from '@angular/common/http';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;

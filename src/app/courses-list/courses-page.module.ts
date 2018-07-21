@@ -11,7 +11,7 @@ import {ModalWindowComponent} from '../shared/components/modal-window/modal-wind
 import {CoursesEditComponent} from './courses-list/courses-item/courses-edit/courses-edit.component';
 import {BreadcrumbsComponent} from '../shared/components/breadcrumbs/breadcrumbs.component';
 import {SharedModule} from '../shared/shared.module';
-import {CoursesItemEditComponent} from "./courses-item-edit/courses-item-edit.component";
+import {CoursesItemEditComponent} from './courses-item-edit/courses-item-edit.component';
 import { CoursesRoutingModule } from './courses-routing.module';
 import { CoursesPageComponent } from './courses-page/courses-page.component';
 

@@ -26,7 +26,7 @@ export class HeaderComponent implements OnInit {
             this.user = user;
           });
     }
-    this.activeRoute.data.subscribe(data => this.pageTitle = data.title)
+    this.activeRoute.data.subscribe(data => this.pageTitle = data.title);
   }
 
   logOff() {

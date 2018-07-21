@@ -1,10 +1,10 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {Course} from '../Course';
 import {CoursesService} from '../courses.service';
-import {FilterByPipe} from '../filter-by.pipe';
+import {FilterByPipe} from '../../shared/pipes/filter-by.pipe';
 import {ToolboxComponent} from './toolbox/toolbox.component';
 import {ModalWindowComponent} from '../../shared/components/modal-window/modal-window.component';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-courses-list',
@@ -34,7 +34,6 @@ export class CoursesListComponent implements OnInit {
         courses => {
           this.courses = courses;
           this.toolBox.onSearch();
-          console.log('Courses', courses);
           this.loader = false;
         },
         () =>  {
@@ -52,16 +51,19 @@ export class CoursesListComponent implements OnInit {
     ) as Course[];
   }
 
-  addCourse() {
-    // const newCourse = {
-    //   title: '',
-    //   duration: 0,
-    //   description: '',
-    //   edit: true,
-    //   new_course: true
-    // };
-    // this.filteredCourses.unshift(newCourse as Course);
-    this.router.navigateByUrl('courses/new')
+  addCourse($event) {
+    this.router.navigateByUrl('courses/new');
+  }
+
+  addCourseWithoutRoute() {
+    const newCourse = {
+      title: '',
+      duration: 0,
+      description: '',
+      edit: true,
+      new_course: true
+    };
+    this.filteredCourses.unshift(newCourse as Course);
   }
 
   onDeleteCourse(course: Course) {
@@ -76,6 +78,10 @@ export class CoursesListComponent implements OnInit {
   }
 
   onEditCourse({course, isEdit}) {
+    this.router.navigateByUrl(`courses/${course.id}`);
+  }
+
+  onEditCourseWithoutRoute({course, isEdit}) {
     if (course.new_course && !isEdit) {
       this.filteredCourses = this.filteredCourses.filter(filteredCourse =>
         course.id !== filteredCourse.id

@@ -9,7 +9,7 @@
   </app-courses-item>
   <ng-template *ngIf="filteredCourses.length === 0; then thenBlock else elseBlock"></ng-template>
   <ng-template #thenBlock>
-    <div class="not_found" (click)="addCourse()">
+    <div class="not_found" (click)="addCourse($event)">
       NO DATA, FEEL FREE TO ADD NEW COURSE
     </div>
   </ng-template>
