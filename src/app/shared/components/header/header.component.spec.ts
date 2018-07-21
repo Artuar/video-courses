@@ -3,21 +3,33 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { HeaderComponent } from './header.component';
 import {User} from '../../services/User';
 import {UserService} from '../../services/user.service';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {HttpClient, HttpHandler} from '@angular/common/http';
+import {Observable} from 'rxjs/index';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
   let fixture: ComponentFixture<HeaderComponent>;
 
+  const fakeActivatedRoute = {
+    snapshot: { data: { } },
+    data: new Observable()
+  } as ActivatedRoute;
+
+  const mockUserService = {
+    getUserData: () => {},
+    isLogin : () => {}
+  };
+
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ HeaderComponent ],
       providers: [
-        UserService,
+        { provide: UserService, useValue: mockUserService },
         HttpClient,
         HttpHandler,
+        {provide: ActivatedRoute, useValue: fakeActivatedRoute},
         {
           provide: Router,
           useClass: class { navigate = jasmine.createSpy('navigate'); }
@@ -30,7 +42,6 @@ describe('HeaderComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(HeaderComponent);
     component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
@@ -38,6 +49,8 @@ describe('HeaderComponent', () => {
   });
 
   it('should render title', async(() => {
+    component.pageTitle = 'Video courses';
+    fixture.detectChanges();
     const title = fixture.debugElement.nativeElement.querySelector('.title');
     expect(title.textContent).toContain('Video courses');
   }));

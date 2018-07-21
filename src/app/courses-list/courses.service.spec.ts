@@ -3,7 +3,7 @@ import {CoursesListComponent} from './courses-list/courses-list.component';
 import {FilterByPipe} from '../shared/pipes/filter-by.pipe';
 import {Router} from '@angular/router';
 
-describe('Component: Login', () => {
+describe('CoursesService', () => {
   let component: CoursesListComponent;
   let service: CoursesService;
   let pipe: FilterByPipe;
@@ -26,8 +26,4 @@ describe('Component: Login', () => {
     expect(component.courses.length).toBe(0);
   });
 
-  it('true after using service', () => {
-    component.ngOnInit();
-    expect(component.courses.length).toBe(5);
-  });
 });

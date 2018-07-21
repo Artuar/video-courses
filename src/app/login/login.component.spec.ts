@@ -5,10 +5,14 @@ import {FormsModule} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../shared/services/user.service';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
+import {HttpClient, HttpHandler} from '@angular/common/http';
 
 describe('LoginComponent', () => {
 
-  const fakeActivatedRoute = {
+  let fixture: ComponentFixture<LoginComponent>;
+  let component;
+
+    const fakeActivatedRoute = {
     snapshot: { data: { } }
   } as ActivatedRoute;
 
@@ -18,6 +22,8 @@ describe('LoginComponent', () => {
       declarations: [ LoginComponent ],
       providers: [
         UserService,
+        HttpClient,
+        HttpHandler,
         {provide: ActivatedRoute, useValue: fakeActivatedRoute},
         {
           provide: Router,
@@ -28,5 +34,14 @@ describe('LoginComponent', () => {
     })
     .compileComponents();
   }));
+
+  beforeEach(() => {
+    fixture = TestBed.createComponent(LoginComponent);
+    component = fixture.componentInstance;
+  });
+
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 
 });

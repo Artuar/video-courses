@@ -1,20 +1,22 @@
 import {UserService} from './user.service';
 import {HeaderComponent} from '../components/header/header.component';
 import {HttpClient} from '@angular/common/http';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 
-describe('Component: Login', () => {
+describe('UserService', () => {
 
   let component: HeaderComponent;
   let service: UserService;
   // tslint:disable-next-line
   let router: Router;
   // tslint:disable-next-line
+  let activatedRoute: ActivatedRoute;
+  // tslint:disable-next-line
   let http: HttpClient;
 
   beforeEach(() => {
     service = new UserService(http);
-    component = new HeaderComponent(service, router);
+    component = new HeaderComponent(service, router, activatedRoute);
   });
 
   afterEach(() => {

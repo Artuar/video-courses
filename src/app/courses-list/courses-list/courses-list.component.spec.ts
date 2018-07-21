@@ -5,6 +5,7 @@ import { CoursesListComponent } from './courses-list.component';
 import {CoursesService} from '../courses.service';
 import {HttpClient, HttpHandler} from '@angular/common/http';
 import {OrderByPipe} from '../../shared/pipes/order-by.pipe';
+import {Router} from '@angular/router';
 
 const TEST_VALUE = [
   {
@@ -38,7 +39,11 @@ describe('CoursesPageComponent', () => {
       providers: [
         CoursesService,
         HttpClient,
-        HttpHandler
+        HttpHandler,
+        {
+          provide: Router,
+          useClass: class { navigate = jasmine.createSpy('navigate'); }
+        }
       ],
       schemas: [NO_ERRORS_SCHEMA]
     })
@@ -58,19 +63,21 @@ describe('CoursesPageComponent', () => {
     component.filteredCourses = [];
     fixture.detectChanges();
 
-    let loadButton = fixture.debugElement.nativeElement.querySelector('.not_found');
+    const loadButton = fixture.debugElement.nativeElement.querySelector('.not_found');
     loadButton.click();
 
     fixture.whenStable().then(() => {
       expect(component.addCourse).toHaveBeenCalled();
     });
+  });
 
+  it('loadMore should be called', () => {
     spyOn(component, 'loadMore');
 
     component.filteredCourses = TEST_VALUE;
     fixture.detectChanges();
 
-    loadButton = fixture.debugElement.nativeElement.querySelector('.load_more_button');
+    const loadButton = fixture.debugElement.nativeElement.querySelector('.load_more_button');
     loadButton.click();
 
     fixture.whenStable().then(() => {
