@@ -1,6 +1,6 @@
 <ng-container *ngIf="course">
-  <ng-template *ngIf="!course.edit; then thenBlock else elseBlock"></ng-template>
-  <ng-template #thenBlock>
+  <ng-template *ngIf="!course.edit; then viewBlock else editBlock"></ng-template>
+  <ng-template #viewBlock>
     <div class="courses_item" [appCourseHighlight]="course.creation_date">
       <div class="course_info">
         <div class="course_data">
@@ -26,7 +26,7 @@
       </div>
     </div>
   </ng-template>
-  <ng-template #elseBlock>
+  <ng-template #editBlock>
     <app-courses-edit
       [course]="course"
       (save)="onSave($event)"

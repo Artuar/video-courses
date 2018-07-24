@@ -69,7 +69,6 @@ export class CoursesService {
   }
 
   public saveCourse(courseProps)  {
-    console.log('courseProps', courseProps);
     if (this.coursesList.some(course => course.id === courseProps.id)) {
       this.coursesList.forEach((course, index) => {
         if (course.id === courseProps.id) {

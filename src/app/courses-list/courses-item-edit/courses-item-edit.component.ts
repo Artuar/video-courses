@@ -24,8 +24,6 @@ export class CoursesItemEditComponent implements OnInit {
 
   ngOnInit() {
     if (this.id !== 'new') {
-      console.log(this.id);
-
       this.coursesService
         .getCourseById(+this.id)
         .subscribe(
@@ -52,7 +50,6 @@ export class CoursesItemEditComponent implements OnInit {
       value = new Date(value).getTime();
     }
     this.course[property] = value;
-    console.log('this.course', this.course);
   }
 
   onSave() {

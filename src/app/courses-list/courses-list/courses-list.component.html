@@ -7,13 +7,13 @@
     (save)="onSaveCourse($event)"
     (edit)="onEditCourse($event)">
   </app-courses-item>
-  <ng-template *ngIf="filteredCourses.length === 0; then thenBlock else elseBlock"></ng-template>
-  <ng-template #thenBlock>
+  <ng-template *ngIf="filteredCourses.length === 0; then noDataBlock else loadMoreBlock"></ng-template>
+  <ng-template #noDataBlock>
     <div class="not_found" (click)="addCourse($event)">
       NO DATA, FEEL FREE TO ADD NEW COURSE
     </div>
   </ng-template>
-  <ng-template #elseBlock>
+  <ng-template #loadMoreBlock>
     <div class="load_more_button" (click)="loadMore()">
       LOAD MORE
     </div>

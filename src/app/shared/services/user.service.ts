@@ -50,11 +50,9 @@ export class UserService {
   isLogin(): boolean {
     const localData = window.localStorage['video-courses'];
     let data;
-    console.log('localData', localData);
     if (localData)  {
       try {
         data = JSON.parse(localData);
-        console.log(data);
       } catch (e) {
         delete window.localStorage['video-courses'];
       }

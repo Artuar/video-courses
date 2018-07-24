@@ -7,17 +7,13 @@ import {Course} from '../../Course';
   styleUrls: ['./courses-item.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class CoursesItemComponent implements OnInit {
+export class CoursesItemComponent {
   @Input() course: Course;
   @Output() del = new EventEmitter();
   @Output() edit = new EventEmitter();
   @Output() save = new EventEmitter();
 
   constructor(  ) { }
-
-  ngOnInit() {
-    console.log('course', this.course);
-  }
 
   onEdit($event) {
     $event.stopPropagation();
