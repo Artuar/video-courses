@@ -8,18 +8,23 @@ import {HttpClientModule} from '@angular/common/http';
 import {LoginModule} from './login/login.module';
 import {HttpClientInMemoryWebApiModule} from 'angular-in-memory-web-api';
 import {InMemoryDataService} from './shared/services/InMemoryDbService';
+import {CoreModule} from './core/core.module';
+import { NotFoundComponent } from './not-found/not-found.component';
+import {SharedModule} from "./shared/shared.module";
 
 @NgModule({
   declarations: [
     AppComponent,
-    FooterComponent
+    FooterComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    CoursesPageModule,
+    SharedModule,
     LoginModule,
     AppRoutingModule,
+    CoreModule,
 
     HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, { delay: 500 })
   ],

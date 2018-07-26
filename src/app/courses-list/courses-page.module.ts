@@ -36,6 +36,9 @@ import { CoursesPageComponent } from './courses-page/courses-page.component';
   ],
   providers: [
     CoursesService
+  ],
+  bootstrap:[
+    CoursesPageComponent
   ]
 })
 export class CoursesPageModule { }

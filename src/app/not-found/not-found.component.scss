@@ -1,0 +1,29 @@
+@import '../../assets/styles/constants';
+
+.not_found{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  .message{
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    box-shadow: 0 0 15px $grey;
+    margin-top: 25vh;
+    align-items: center;
+    .title{
+      width: 100%;
+      padding: 12px 0;
+      border-bottom: 1px solid $grey;
+      font-size: 18px;
+      text-align: center;
+    }
+    .home{
+      margin: 12px;
+      display: inline-block;
+      width: 200px;
+      @include button();
+    }
+  }
+}

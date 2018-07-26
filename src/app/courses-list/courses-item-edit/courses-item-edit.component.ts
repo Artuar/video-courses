@@ -28,6 +28,9 @@ export class CoursesItemEditComponent implements OnInit {
         .getCourseById(+this.id)
         .subscribe(
           course => {
+            if(!course){
+              this.onCancel();
+            }
             this.course = course;
           },
           () =>  {
@@ -58,7 +61,7 @@ export class CoursesItemEditComponent implements OnInit {
   }
 
   onCancel() {
-    this.router.navigateByUrl('course');
+    this.router.navigateByUrl('courses');
   }
 
 }

@@ -1,3 +1,4 @@
+<app-breadcrumbs></app-breadcrumbs>
 <app-toolbox (search)="search($event)" (add)="addCourse($event)"></app-toolbox>
 <div class="courses-list" *ngIf="filteredCourses" [ngClass]="{ loader: loader }">
   <app-courses-item

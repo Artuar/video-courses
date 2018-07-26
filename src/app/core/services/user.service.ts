@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 
-import {throwError, Observable, Subject} from 'rxjs';
+import {throwError, Observable} from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import {User} from './User';
 

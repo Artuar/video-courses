@@ -1,5 +1,5 @@
 import {UserService} from './user.service';
-import {HeaderComponent} from '../components/header/header.component';
+import {HeaderComponent} from '../../shared/components/header/header.component';
 import {HttpClient} from '@angular/common/http';
 import {ActivatedRoute, Router} from '@angular/router';
 
