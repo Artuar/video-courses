@@ -28,7 +28,7 @@ export class CoursesItemEditComponent implements OnInit {
         .getCourseById(+this.id)
         .subscribe(
           course => {
-            if(!course){
+            if (!course) {
               this.onCancel();
             }
             this.course = course;

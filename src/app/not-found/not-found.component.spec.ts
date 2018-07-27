@@ -1,6 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NotFoundComponent } from './not-found.component';
+import {NO_ERRORS_SCHEMA} from "@angular/core";
+import {Router} from "@angular/router";
 
 describe('NotFoundComponent', () => {
   let component: NotFoundComponent;
@@ -8,7 +10,15 @@ describe('NotFoundComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ NotFoundComponent ]
+      declarations: [ NotFoundComponent ],
+      providers: [
+        {
+          provide: Router,
+          useClass: class { navigate = jasmine.createSpy('navigate'); }
+        }
+      ],
+      schemas: [NO_ERRORS_SCHEMA]
+
     })
     .compileComponents();
   }));
