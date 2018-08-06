@@ -1,21 +1,20 @@
 <app-breadcrumbs></app-breadcrumbs>
 <app-toolbox (search)="search($event)" (add)="addCourse($event)"></app-toolbox>
-<div class="courses-list" *ngIf="filteredCourses" [ngClass]="{ loader: loader }">
+<div class="courses-list" *ngIf="courses" [ngClass]="{ loader: loader }">
   <app-courses-item
-    *ngFor="let course of filteredCourses| orderBy: 'creation_date'"
+    *ngFor="let course of courses| orderBy: 'date'"
     [course]="course"
     (del)="onDeleteCourse($event)"
-    (save)="onSaveCourse($event)"
     (edit)="onEditCourse($event)">
   </app-courses-item>
-  <ng-template *ngIf="filteredCourses.length === 0; then noDataBlock else loadMoreBlock"></ng-template>
+  <ng-template *ngIf="courses.length === 0; then noDataBlock else loadMoreBlock"></ng-template>
   <ng-template #noDataBlock>
     <div class="not_found" (click)="addCourse($event)">
       NO DATA, FEEL FREE TO ADD NEW COURSE
     </div>
   </ng-template>
   <ng-template #loadMoreBlock>
-    <div class="load_more_button" (click)="loadMore()">
+    <div class="load_more_button" *ngIf="thereAreMore" (click)="loadMore()">
       LOAD MORE
     </div>
   </ng-template>

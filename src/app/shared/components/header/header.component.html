@@ -4,7 +4,7 @@
     <div class="title">{{ pageTitle }}</div>
   </div>
   <div class="user_block" *ngIf="user">
-    <div class="user">{{user.firstName}} {{user.lastName}}</div>
+    <div class="user" *ngIf="user.name">{{user.name.first}} {{user.name.last}}</div>
     <div class="logOff" (click)="logOff()">
       <img src="../../../../assets/images/baseline-exit_to_app-24px.svg"/>
     </div>

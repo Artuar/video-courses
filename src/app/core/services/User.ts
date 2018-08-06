@@ -1,5 +1,9 @@
 export interface User {
   id: number;
-  firstName: string;
-  lastName: string;
+  fakeToken: string;
+  name: {
+    first: string,
+    last: string
+  },
+  login: string;
 }

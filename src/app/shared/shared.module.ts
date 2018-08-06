@@ -4,6 +4,7 @@ import {HeaderComponent} from './components/header/header.component';
 import {AuthGuardService} from './services/auth-guard.service';
 import { SmartInputComponent } from './components/smart-input/smart-input.component';
 import {FormsModule} from '@angular/forms';
+import {ModalWindowComponent} from "./components/modal-window/modal-window.component";
 
 @NgModule({
   imports: [
@@ -12,10 +13,13 @@ import {FormsModule} from '@angular/forms';
   ],
   declarations: [
     HeaderComponent,
-    SmartInputComponent ],
+    SmartInputComponent,
+    ModalWindowComponent
+  ],
   exports: [
     HeaderComponent,
-    SmartInputComponent
+    SmartInputComponent,
+    ModalWindowComponent
   ],
   providers: [
     AuthGuardService

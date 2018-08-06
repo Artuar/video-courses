@@ -7,16 +7,14 @@ import {User} from './User';
 
 @Injectable()
 export class UserService {
-
-  private userData: User;
-
-  private apiUrl: string;
+  private loginUrl: string = 'http://localhost:3004/auth/login';
+  private userUrl: string = 'http://localhost:3004/auth/userinfo';
+  private user: User;
+  private token: string;
 
   constructor(
     private http: HttpClient,
-  ) {
-    this.apiUrl = 'api/user';
-  }
+  ) {  }
 
   private handleError(error: any) {
     console.error('Error', error);
@@ -24,19 +22,22 @@ export class UserService {
   }
 
   getUserData(): Observable<User> {
-    return this.http.get(this.apiUrl)
+    return this.http.post(this.userUrl, {}, {headers: {'Authorization': this.token}})
       .pipe(
         map(response => response as User),
         catchError(this.handleError)
       );
   }
 
-  login(): Observable<{}> {
-    window.localStorage['video-courses'] = JSON.stringify({IsAuthenticated: true});
-    return new Observable((observer) => {
-      observer.next({IsAuthenticated: true});
-      observer.complete();
-    });
+  login(login: string, password: string): Observable<{}> {
+    return this.http.post(this.loginUrl, {login, password})
+      .pipe(
+        map(auth => {
+          window.localStorage['video-courses'] = JSON.stringify({IsAuthenticated: true});
+          this.token = auth['token'];
+          return auth;
+        })
+      );
   }
 
   logout(): Observable<{}> {
@@ -57,7 +58,11 @@ export class UserService {
         delete window.localStorage['video-courses'];
       }
     }
-    return data && data.IsAuthenticated;
+    return this.token && data.IsAuthenticated;
+  }
+
+  getToken(){
+    return this.token;
   }
 
 }

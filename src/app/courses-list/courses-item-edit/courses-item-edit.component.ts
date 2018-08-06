@@ -11,6 +11,7 @@ import {Course} from '../Course';
 export class CoursesItemEditComponent implements OnInit {
   private id: string;
   public course: Course;
+  public authorsArray: string[] = [];
 
   constructor(
     private activatedRoute: ActivatedRoute,
@@ -32,32 +33,42 @@ export class CoursesItemEditComponent implements OnInit {
               this.onCancel();
             }
             this.course = course;
+            this.authorsArray = this.course.authors
+              .map(auth => `${auth['firstName']} ${auth['lastName']}`);
           },
           () =>  {
             console.error('Error');
           });
     } else {
       this.course = {
-        title: '',
+        name: '',
         duration: 0,
         description: '',
-        edit: true,
-        new_course: true
+        authors: []
       } as Course;
     }
   }
 
   onChange($event, property) {
     let value = $event.target ? $event.target.value : $event;
-    if (property === 'creation_date') {
+    if (property === 'date') {
       value = new Date(value).getTime();
+    } else if (property === 'authors') {
+      value = value.map(author => {
+        let authNameArr = author.split(' ');
+        return {firstName: authNameArr.shift(), lastName: authNameArr.join(' ')}
+      });
     }
     this.course[property] = value;
   }
 
   onSave() {
-    this.coursesService.saveCourse(this.course);
-    this.onCancel();
+    this.coursesService.deleteCourse(this.course.id)
+      .subscribe(()=>
+          this.coursesService.saveCourse(this.course)
+          .subscribe(course => this.onCancel(),
+            () =>  console.error('Error')),
+      () =>  console.error('Error'));
   }
 
   onCancel() {

@@ -1,92 +1,80 @@
 import { Injectable } from '@angular/core';
 
-import {BehaviorSubject, Observable, Subject} from 'rxjs';
+import {BehaviorSubject, Observable, throwError} from 'rxjs';
 import {Course, CourseClass} from './Course';
+import {HttpClient} from "@angular/common/http";
+import {catchError, map} from "rxjs/internal/operators";
 
-const COURSES_LIST = [
-  {
-    id: 0, title: 'Java course', creation_date: 1530910800000, duration: 88, top_rated: true,
-    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has ' +
-    'been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of ' +
-    'type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the ' +
-    'leap into electronic typesetting, remaining essentially unchanged. It ...'
-  },
-  {
-    id: 1, title: 'Javascript course', creation_date: 1546207200000, duration: 48, top_rated: true,
-    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has ' +
-    'been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of ' +
-    'type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the ' +
-    'leap into electronic typesetting, remaining essentially unchanged. It ...'
-  },
-  {
-    id: 4, title: 'NodeJs course', creation_date: 1530910800000, duration: 1, top_rated: false,
-    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has ' +
-    'been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of ' +
-    'type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the ' +
-    'leap into electronic typesetting, remaining essentially unchanged. It ...'
-  },
-  {
-    id: 2, title: 'Python course', creation_date: 1526763600000, duration: 28, top_rated: false,
-    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has ' +
-    'been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of ' +
-    'type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the ' +
-    'leap into electronic typesetting, remaining essentially unchanged. It ...'
-  },
-  {
-    id: 3, title: 'Kotlin course', creation_date: 1526677200000, duration: 12, top_rated: false,
-    description: 'Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has ' +
-    'been the industry\'s standard dummy text ever since the 1500s, when an unknown printer took a galley of ' +
-    'type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the ' +
-    'leap into electronic typesetting, remaining essentially unchanged. It ...'
-  }
-];
 
 @Injectable()
 export class CoursesService {
-  private coursesList: Course[];
-
+  private coursesList: Course[] = [];
   private coursesSubject: BehaviorSubject<Course[]>;
+  private courseUrl: string = 'http://localhost:3004/courses';
+  private count:number = 0;
+  private step:number = 5;
 
-  constructor() {
-    this.coursesList = COURSES_LIST;
-    this.coursesSubject = new BehaviorSubject(this.coursesList);
+  constructor(
+    private http: HttpClient
+  ) {  }
+
+  private handleError(error: any) {
+    console.error('Error', error);
+    return throwError(error.message || error);
   }
 
-  public getCoursesList() {
-    return this.coursesSubject;
+  public getCoursesList(textFragment: string, fromBeginning?: boolean): Observable<{courses: Course[], thereAreMore: boolean}> {
+    if(fromBeginning){
+      this.count = 0;
+      this.coursesList = [];
+    }
+    return this.http.get(
+      this.courseUrl,
+      {
+        params: {
+          start: (this.count).toString(),
+          count: (this.step).toString(),
+          sort: 'date',
+          textFragment
+        }
+      })
+      .pipe(
+        map(response => {
+          this.count += this.step;
+          this.coursesList = [...this.coursesList, ...(response as {}[])] as Course[];
+          return {
+            courses: this.coursesList,
+            thereAreMore: response['length'] === this.step
+          }
+        }),
+        catchError(this.handleError)
+      );
   }
 
   public getCourseById(id: number): Observable<Course> {
-    return new Observable((observer) => {
-      observer.next(this.coursesList.filter(course => course.id === id)[0]);
-      observer.complete();
-    });
+    return this.http.get(`${this.courseUrl}/${id}`)
+      .pipe(
+        map(course => course as Course),
+        catchError(this.handleError)
+      );
   }
 
   public deleteCourse(id: number) {
-    this.coursesList = this.coursesList.filter(course => id !== course.id);
-    this.coursesSubject.next(this.coursesList);
+    return this.http.delete(`${this.courseUrl}/${id}`)
+      .pipe(
+        map(() => {
+          this.coursesList = this.coursesList.filter(course => id !== course.id);
+          return this.coursesList;
+        }),
+        catchError(this.handleError)
+      );
   }
 
-  public saveCourse(courseProps)  {
-    if (this.coursesList.some(course => course.id === courseProps.id)) {
-      this.coursesList.forEach((course, index) => {
-        if (course.id === courseProps.id) {
-          this.coursesList[index] = courseProps;
-        }
-      });
-    } else {
-      const newCourse = new CourseClass(
-        new Date().getTime(),
-        courseProps.title,
-        courseProps.creation_date,
-        courseProps.duration,
-        courseProps.description,
-        Math.random() < 0.5,
-        courseProps.authors
+  public saveCourse(courseProps): Observable<Course> {
+    return this.http.post(this.courseUrl, courseProps)
+      .pipe(
+        map(course => course as Course),
+        catchError(this.handleError)
       );
-      this.coursesList.push(newCourse);
-    }
-    this.coursesSubject.next(this.coursesList);
   }
 }

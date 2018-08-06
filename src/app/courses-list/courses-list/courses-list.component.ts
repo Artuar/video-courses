@@ -17,23 +17,27 @@ export class CoursesListComponent implements OnInit {
   @ViewChild(ModalWindowComponent) modal: ModalWindowComponent;
 
   public courses: Course[] = [];
-  public filteredCourses: Course[];
   public loader = false;
+  public thereAreMore = true;
+  public searchString = '';
 
   constructor(
     private coursesService: CoursesService,
-    private filterBy: FilterByPipe,
     private router: Router
   ) {}
 
   ngOnInit() {
+    this.getCoursesList(true);
+  }
+
+  getCoursesList(fromBeginning?: boolean){
     this.loader = true;
     this.coursesService
-      .getCoursesList()
+      .getCoursesList(this.searchString, fromBeginning)
       .subscribe(
         courses => {
-          this.courses = courses;
-          this.toolBox.onSearch();
+          this.courses = courses.courses;
+          this.thereAreMore = courses.thereAreMore;
           this.loader = false;
         },
         () =>  {
@@ -43,36 +47,31 @@ export class CoursesListComponent implements OnInit {
   }
 
   search(searchString: string) {
-    // this.getCourses(searchString);
-    this.filteredCourses = this.filterBy.transform(
-      this.courses,
-      'title',
-      searchString
-    ) as Course[];
+    this.searchString = searchString;
+    this.getCoursesList(true);
   }
 
   addCourse($event) {
     this.router.navigateByUrl('courses/new');
   }
 
-  addCourseWithoutRoute() {
-    const newCourse = {
-      title: '',
-      duration: 0,
-      description: '',
-      edit: true,
-      new_course: true
-    };
-    this.filteredCourses.unshift(newCourse as Course);
-  }
-
   onDeleteCourse(course: Course) {
     this.modal.show({
       title: `Delete course`,
-      message: `Do you really want to delete course '${course.title}'?`,
+      message: `Do you really want to delete course '${course.name}'?`,
       buttonText: 'Delete',
       buttonAction: () => {
-        this.coursesService.deleteCourse(course.id);
+        this.loader = true;
+        this.coursesService.deleteCourse(course.id)
+          .subscribe(
+            courses => {
+              this.courses = courses;
+              this.loader = false;
+            },
+            () =>  {
+              console.error('Error');
+              this.loader = false;
+            });
       }
     });
   }
@@ -81,24 +80,7 @@ export class CoursesListComponent implements OnInit {
     this.router.navigateByUrl(`courses/${course.id}`);
   }
 
-  onEditCourseWithoutRoute({course, isEdit}) {
-    if (course.new_course && !isEdit) {
-      this.filteredCourses = this.filteredCourses.filter(filteredCourse =>
-        course.id !== filteredCourse.id
-      );
-    } else {
-      this.filteredCourses.forEach(filteredCourse => {
-        filteredCourse.edit = course.id === filteredCourse.id && isEdit;
-      });
-    }
-  }
-
-  onSaveCourse(course) {
-    this.loader = true;
-    this.coursesService.saveCourse(course);
-  }
-
   loadMore() {
-    console.log(`Click on Load More`);
+    this.getCoursesList();
   }
 }

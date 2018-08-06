@@ -1,4 +1,4 @@
-<app-breadcrumbs [title]="course.title || 'New course'"></app-breadcrumbs>
+<app-breadcrumbs *ngIf="course" [title]="course.name || 'New course'"></app-breadcrumbs>
 <div class="courses_edit" *ngIf="course">
   <div class="head">New course</div>
   <div class="course_info">
@@ -6,7 +6,7 @@
       <label>Title:</label>
       <input type="text"
              placeholder="Course title"
-             [(ngModel)]="course.title"/>
+             [(ngModel)]="course.name"/>
     </div>
     <div class="description">
       <label>Description:</label>
@@ -26,13 +26,14 @@
     <div class="date">
       <label>Date:</label>
       <input type="date"
-             value="{{course.creation_date | date: 'yyyy-MM-dd'}}"
-             (change)="onChange($event, 'creation_date')"/>
+             value="{{course.date | date: 'yyyy-MM-dd'}}"
+             (change)="onChange($event, 'date')"/>
     </div>
     <div class="authors">
       <label>Authors:</label>
       <app-smart-input
-        [startList]="course.authors"
+        *ngIf="authorsArray.length"
+        [startList]="authorsArray"
         (change)="onChange($event, 'authors')">
       </app-smart-input>
     </div>

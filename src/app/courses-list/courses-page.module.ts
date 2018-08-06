@@ -7,8 +7,6 @@ import {CoursesService} from './courses.service';
 import {FormsModule} from '@angular/forms';
 import {CourseHighlightDirective} from '../shared/directives/course-highlight.directive';
 import {PipesModule} from '../shared/pipes/pipes.module';
-import {ModalWindowComponent} from '../shared/components/modal-window/modal-window.component';
-import {CoursesEditComponent} from './courses-list/courses-item/courses-edit/courses-edit.component';
 import {BreadcrumbsComponent} from '../shared/components/breadcrumbs/breadcrumbs.component';
 import {SharedModule} from '../shared/shared.module';
 import {CoursesItemEditComponent} from './courses-item-edit/courses-item-edit.component';
@@ -28,9 +26,7 @@ import { CoursesPageComponent } from './courses-page/courses-page.component';
     ToolboxComponent,
     CoursesPageComponent,
     CoursesItemComponent,
-    CoursesEditComponent,
     CourseHighlightDirective,
-    ModalWindowComponent,
     CoursesItemEditComponent,
     CoursesListComponent
   ],

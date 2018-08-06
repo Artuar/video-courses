@@ -11,7 +11,6 @@ export class CoursesItemComponent {
   @Input() course: Course;
   @Output() del = new EventEmitter();
   @Output() edit = new EventEmitter();
-  @Output() save = new EventEmitter();
 
   constructor(  ) { }
 
@@ -22,10 +21,6 @@ export class CoursesItemComponent {
 
   onDelete() {
     this.del.emit(this.course);
-  }
-
-  onSave(course) {
-    this.save.emit(course);
   }
 
   onCancel() {
