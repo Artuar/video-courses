@@ -22,7 +22,7 @@ export class UserService {
   }
 
   getUserData(): Observable<User> {
-    return this.http.post(this.userUrl, {}, {headers: {'Authorization': this.token}})
+    return this.http.post(this.userUrl, {})
       .pipe(
         map(response => response as User),
         catchError(this.handleError)
