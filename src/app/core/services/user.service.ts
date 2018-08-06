@@ -7,8 +7,8 @@ import {User} from './User';
 
 @Injectable()
 export class UserService {
-  private loginUrl: string = 'http://localhost:3004/auth/login';
-  private userUrl: string = 'http://localhost:3004/auth/userinfo';
+  private loginUrl = 'http://localhost:3004/auth/login';
+  private userUrl = 'http://localhost:3004/auth/userinfo';
   private user: User;
   private token: string;
 
@@ -61,7 +61,7 @@ export class UserService {
     return this.token && data.IsAuthenticated;
   }
 
-  getToken(){
+  getToken() {
     return this.token;
   }
 

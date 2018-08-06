@@ -10,19 +10,19 @@ import {Router} from '@angular/router';
 const TEST_VALUE = [
   {
     id: 0,
-    title: 'First',
-    creation_date: 1526763600000,
+    name: 'First',
+    date: 1526763600000,
     duration: 1,
     description: 'description',
-    top_rated: false
+    isTopRated: false
   },
   {
     id: 1,
-    title: 'Second',
-    creation_date: 1526763600000,
+    name: 'Second',
+    date: 1526763600000,
     duration: 62,
     description: 'without description',
-    top_rated: true
+    isTopRated: true
   }
 ];
 
@@ -60,7 +60,7 @@ describe('CoursesPageComponent', () => {
   it('noData should be called', () => {
     spyOn(component, 'addCourse');
 
-    component.filteredCourses = [];
+    component.courses = [];
     fixture.detectChanges();
 
     const loadButton = fixture.debugElement.nativeElement.querySelector('.not_found');
@@ -74,7 +74,7 @@ describe('CoursesPageComponent', () => {
   it('loadMore should be called', () => {
     spyOn(component, 'loadMore');
 
-    component.filteredCourses = TEST_VALUE;
+    component.courses = TEST_VALUE;
     fixture.detectChanges();
 
     const loadButton = fixture.debugElement.nativeElement.querySelector('.load_more_button');

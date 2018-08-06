@@ -55,8 +55,8 @@ export class CoursesItemEditComponent implements OnInit {
       value = new Date(value).getTime();
     } else if (property === 'authors') {
       value = value.map(author => {
-        let authNameArr = author.split(' ');
-        return {firstName: authNameArr.shift(), lastName: authNameArr.join(' ')}
+        const authNameArr = author.split(' ');
+        return {firstName: authNameArr.shift(), lastName: authNameArr.join(' ')};
       });
     }
     this.course[property] = value;
@@ -64,7 +64,7 @@ export class CoursesItemEditComponent implements OnInit {
 
   onSave() {
     this.coursesService.deleteCourse(this.course.id)
-      .subscribe(()=>
+      .subscribe(() =>
           this.coursesService.saveCourse(this.course)
           .subscribe(course => this.onCancel(),
             () =>  console.error('Error')),

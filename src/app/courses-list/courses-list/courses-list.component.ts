@@ -30,7 +30,7 @@ export class CoursesListComponent implements OnInit {
     this.getCoursesList(true);
   }
 
-  getCoursesList(fromBeginning?: boolean){
+  getCoursesList(fromBeginning?: boolean) {
     this.loader = true;
     this.coursesService
       .getCoursesList(this.searchString, fromBeginning)

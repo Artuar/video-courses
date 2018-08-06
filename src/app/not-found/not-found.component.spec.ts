@@ -1,8 +1,8 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { NotFoundComponent } from './not-found.component';
-import {NO_ERRORS_SCHEMA} from "@angular/core";
-import {Router} from "@angular/router";
+import {NO_ERRORS_SCHEMA} from '@angular/core';
+import {Router} from '@angular/router';
 
 describe('NotFoundComponent', () => {
   let component: NotFoundComponent;

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import {Router} from '@angular/router';
 import {UserService} from '../core/services/user.service';
-import {ModalWindowComponent} from "../shared/components/modal-window/modal-window.component";
+import {ModalWindowComponent} from '../shared/components/modal-window/modal-window.component';
 import {ViewChild} from '@angular/core';
 
 @Component({

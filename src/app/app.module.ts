@@ -8,7 +8,7 @@ import {LoginModule} from './login/login.module';
 import {CoreModule} from './core/core.module';
 import { NotFoundComponent } from './not-found/not-found.component';
 import {SharedModule} from './shared/shared.module';
-import {TokenInterceptor} from "./shared/services/token.interceptor";
+import {TokenInterceptor} from './shared/services/token.interceptor';
 
 @NgModule({
   declarations: [

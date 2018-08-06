@@ -1,18 +1,18 @@
 import { Injectable } from '@angular/core';
 
 import {BehaviorSubject, Observable, throwError} from 'rxjs';
-import {Course, CourseClass} from './Course';
-import {HttpClient} from "@angular/common/http";
-import {catchError, map} from "rxjs/internal/operators";
+import {Course} from './Course';
+import {HttpClient} from '@angular/common/http';
+import {catchError, map} from 'rxjs/internal/operators';
 
 
 @Injectable()
 export class CoursesService {
   private coursesList: Course[] = [];
   private coursesSubject: BehaviorSubject<Course[]>;
-  private courseUrl: string = 'http://localhost:3004/courses';
-  private count:number = 0;
-  private step:number = 5;
+  private courseUrl = 'http://localhost:3004/courses';
+  private count = 0;
+  private step = 5;
 
   constructor(
     private http: HttpClient
@@ -24,7 +24,7 @@ export class CoursesService {
   }
 
   public getCoursesList(textFragment: string, fromBeginning?: boolean): Observable<{courses: Course[], thereAreMore: boolean}> {
-    if(fromBeginning){
+    if (fromBeginning) {
       this.count = 0;
       this.coursesList = [];
     }
@@ -45,7 +45,7 @@ export class CoursesService {
           return {
             courses: this.coursesList,
             thereAreMore: response['length'] === this.step
-          }
+          };
         }),
         catchError(this.handleError)
       );

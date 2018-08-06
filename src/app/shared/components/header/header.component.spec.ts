@@ -58,7 +58,7 @@ describe('HeaderComponent', () => {
   it('logOff should be called', () => {
     spyOn(component, 'logOff');
 
-    component.user = {id: 1, firstName: 'Test', lastName: ''} as User;
+    component.user = {id: 1, name: {first: 'Test', last: ''}} as User;
     fixture.detectChanges();
 
     const loadButton = fixture.debugElement.nativeElement.querySelector('.logOff');
