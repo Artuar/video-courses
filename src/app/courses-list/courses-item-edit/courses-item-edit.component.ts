@@ -63,12 +63,9 @@ export class CoursesItemEditComponent implements OnInit {
   }
 
   onSave() {
-    this.coursesService.deleteCourse(this.course.id)
-      .subscribe(() =>
-          this.coursesService.saveCourse(this.course)
-          .subscribe(course => this.onCancel(),
-            () =>  console.error('Error')),
-      () =>  console.error('Error'));
+    this.coursesService.saveCourse(this.course)
+      .subscribe(course => this.onCancel(),
+        () =>  console.error('Error'));
   }
 
   onCancel() {

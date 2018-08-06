@@ -9,7 +9,6 @@ import {catchError, map} from 'rxjs/internal/operators';
 @Injectable()
 export class CoursesService {
   private coursesList: Course[] = [];
-  private coursesSubject: BehaviorSubject<Course[]>;
   private courseUrl = 'http://localhost:3004/courses';
   private count = 0;
   private step = 5;
@@ -71,6 +70,13 @@ export class CoursesService {
   }
 
   public saveCourse(courseProps): Observable<Course> {
+    if (courseProps.id !== 'new') {
+      return this.http.put(`${this.courseUrl}/${courseProps.id}`, courseProps)
+        .pipe(
+          map(course => course as Course),
+          catchError(this.handleError)
+        );
+    }
     return this.http.post(this.courseUrl, courseProps)
       .pipe(
         map(course => course as Course),

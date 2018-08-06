@@ -2,7 +2,7 @@ import {CoursesService} from './courses.service';
 import {CoursesListComponent} from './courses-list/courses-list.component';
 import {FilterByPipe} from '../shared/pipes/filter-by.pipe';
 import {Router} from '@angular/router';
-import {HttpClient} from "@angular/common/http";
+import {HttpClient} from '@angular/common/http';
 
 describe('CoursesService', () => {
   let component: CoursesListComponent;
