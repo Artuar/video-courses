@@ -1,6 +1,6 @@
 <app-breadcrumbs></app-breadcrumbs>
 <app-toolbox (search)="search($event)" (add)="addCourse($event)"></app-toolbox>
-<div class="courses-list" *ngIf="courses" [ngClass]="{ loader: loader }">
+<div class="courses-list" *ngIf="courses">
   <app-courses-item
     *ngFor="let course of courses| orderBy: 'date'"
     [course]="course"
@@ -19,4 +19,5 @@
     </div>
   </ng-template>
   <app-modal-window></app-modal-window>
+  <app-speaner [show]="loader"></app-speaner>
 </div>

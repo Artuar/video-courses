@@ -1,0 +1,6 @@
+@import '../../../../assets/styles/constants';
+
+.loader{
+  @include blockWithPreloader('../../../../assets/images/rolling48px.svg');
+}
+

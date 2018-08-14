@@ -22,11 +22,15 @@ export class UserService {
   }
 
   getUserData(): Observable<User> {
-    return this.http.post(this.userUrl, {})
+    return this.getInfo()
       .pipe(
         map(response => response as User),
         catchError(this.handleError)
       );
+  }
+
+  getInfo(){
+    return this.http.post(this.userUrl, {})
   }
 
   login(login: string, password: string): Observable<{}> {
@@ -41,7 +45,6 @@ export class UserService {
   }
 
   logout(): Observable<{}> {
-    window.localStorage['video-courses'] = JSON.stringify({IsAuthenticated: false});
     return new Observable((observer) => {
       observer.next({IsAuthenticated: false});
       observer.complete();
@@ -49,16 +52,13 @@ export class UserService {
   }
 
   isLogin(): boolean {
-    const localData = window.localStorage['video-courses'];
-    let data;
-    if (localData)  {
-      try {
-        data = JSON.parse(localData);
-      } catch (e) {
-        delete window.localStorage['video-courses'];
-      }
-    }
-    return this.token && data.IsAuthenticated;
+    return !!this.token;
+  }
+
+  getIsAuthenticated(): Observable<boolean> {
+    return this.getInfo().pipe(
+      map(user => !!user['fakeToken'])
+    );
   }
 
   getToken() {

@@ -5,6 +5,7 @@ import {AuthGuardService} from './services/auth-guard.service';
 import { SmartInputComponent } from './components/smart-input/smart-input.component';
 import {FormsModule} from '@angular/forms';
 import {ModalWindowComponent} from './components/modal-window/modal-window.component';
+import {SpeanerComponent} from "./components/speaner/speaner.component";
 
 @NgModule({
   imports: [
@@ -14,12 +15,14 @@ import {ModalWindowComponent} from './components/modal-window/modal-window.compo
   declarations: [
     HeaderComponent,
     SmartInputComponent,
-    ModalWindowComponent
+    ModalWindowComponent,
+    SpeanerComponent
   ],
   exports: [
     HeaderComponent,
     SmartInputComponent,
-    ModalWindowComponent
+    ModalWindowComponent,
+    SpeanerComponent
   ],
   providers: [
     AuthGuardService

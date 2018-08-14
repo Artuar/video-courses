@@ -1,7 +1,9 @@
 <div class="toolbox">
   <div class="search">
-    <input type="text" placeholder="Text to search" class="search_field" [(ngModel)]="searchString"/>
-    <div class="search_button" (click)="onSearch()">Search</div>
+    <input type="text"
+           placeholder="Text to search"
+           class="search_field"
+           (keyup)="onSearch($event)"/>
   </div>
   <div class="add_course" (click)="addCourse($event)">Add course</div>
 </div>
