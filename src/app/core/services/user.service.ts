@@ -29,8 +29,8 @@ export class UserService {
       );
   }
 
-  getInfo(){
-    return this.http.post(this.userUrl, {})
+  getInfo() {
+    return this.http.post(this.userUrl, {});
   }
 
   login(login: string, password: string): Observable<{}> {

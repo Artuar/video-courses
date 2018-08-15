@@ -6,7 +6,7 @@ import {Component, Input, OnInit} from '@angular/core';
   styleUrls: ['./speaner.component.scss']
 })
 export class SpeanerComponent implements OnInit {
-  @Input() show: boolean = false;
+  @Input() show = false;
 
   constructor() { }
 
