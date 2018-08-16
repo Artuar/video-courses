@@ -7,7 +7,8 @@
     "build": "ng build --aot",
     "test": "ng test --sourceMap=false --code-coverage",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "run_server": "cd ./json-server && npm run start"
   },
   "private": true,
   "dependencies": {
@@ -20,6 +21,9 @@
     "@angular/platform-browser": "^6.0.3",
     "@angular/platform-browser-dynamic": "^6.0.3",
     "@angular/router": "^6.0.3",
+    "@ngrx/core": "^1.2.0",
+    "@ngrx/store": "^6.1.0",
+    "@ngrx/store-devtools": "^6.1.0",
     "core-js": "^2.5.4",
     "rxjs": "^6.2.1",
     "zone.js": "^0.8.26"

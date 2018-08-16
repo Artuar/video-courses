@@ -1,19 +1,21 @@
 import { Injectable } from '@angular/core';
 
-import {BehaviorSubject, Observable, throwError} from 'rxjs';
+import {Observable, throwError} from 'rxjs';
 import {Course} from './Course';
 import {HttpClient} from '@angular/common/http';
 import {catchError, map} from 'rxjs/internal/operators';
+import {Store} from "@ngrx/store";
+import {AppStore} from "../app.store";
 
 
 @Injectable()
 export class CoursesService {
-  private coursesList: Course[] = [];
   private courseUrl = 'http://localhost:3004/courses';
   private count = 0;
   private step = 5;
 
   constructor(
+    private store: Store<AppStore>,
     private http: HttpClient
   ) {  }
 
@@ -22,10 +24,9 @@ export class CoursesService {
     return throwError(error.message || error);
   }
 
-  public getCoursesList(textFragment: string, fromBeginning?: boolean): Observable<{courses: Course[], thereAreMore: boolean}> {
+  public getCoursesList(textFragment: string, fromBeginning?: boolean) {
     if (fromBeginning) {
       this.count = 0;
-      this.coursesList = [];
     }
     return this.http.get(
       this.courseUrl,
@@ -40,14 +41,19 @@ export class CoursesService {
       .pipe(
         map(response => {
           this.count += this.step;
-          this.coursesList = [...this.coursesList, ...(response as {}[])] as Course[];
           return {
-            courses: this.coursesList,
-            thereAreMore: response['length'] === this.step
+            courses: (response || []) as Course[],
+            thereAreMore: response['length'] === this.step,
+            fromBeginning
           };
         }),
         catchError(this.handleError)
-      );
+      ).subscribe(({courses, thereAreMore, fromBeginning}) => {
+        this.store.dispatch({
+          type: fromBeginning ? 'COURSES_LIST' : 'ADD_COURSES',
+          payload: {courses, thereAreMore}
+        });
+      });
   }
 
   public getCourseById(id: number): Observable<Course> {
@@ -62,25 +68,30 @@ export class CoursesService {
     return this.http.delete(`${this.courseUrl}/${id}`)
       .pipe(
         map(() => {
-          this.coursesList = this.coursesList.filter(course => id !== course.id);
-          return this.coursesList;
+          return id;
         }),
         catchError(this.handleError)
-      );
+      )
+      .subscribe((action) => {
+        this.store.dispatch({type: 'DELETE_COURSE', payload: id });
+      });
   }
 
-  public saveCourse(courseProps): Observable<Course> {
-    if (courseProps.id !== 'new') {
-      return this.http.put(`${this.courseUrl}/${courseProps.id}`, courseProps)
-        .pipe(
-          map(course => course as Course),
-          catchError(this.handleError)
-        );
+  public saveCourse(courseProps) {
+    let url = `${this.courseUrl}/${courseProps.id}`;
+    let type = 'EDIT_COURSE';
+    let method = 'put';
+    if (!courseProps.id) {
+      url = this.courseUrl;
+      type = 'SAVE_COURSE';
+      method = 'post';
     }
-    return this.http.post(this.courseUrl, courseProps)
+    return this.http[method](url, courseProps)
       .pipe(
         map(course => course as Course),
         catchError(this.handleError)
-      );
+      ).subscribe((course) => {
+        this.store.dispatch({type, payload: course });
+      });
   }
 }

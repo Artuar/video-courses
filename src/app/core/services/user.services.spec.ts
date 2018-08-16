@@ -2,6 +2,8 @@ import {UserService} from './user.service';
 import {HeaderComponent} from '../../shared/components/header/header.component';
 import {HttpClient} from '@angular/common/http';
 import {ActivatedRoute, Router} from '@angular/router';
+import {AppStore} from "../../app.store";
+import {Store} from "@ngrx/store";
 
 describe('UserService', () => {
 
@@ -13,14 +15,15 @@ describe('UserService', () => {
   let activatedRoute: ActivatedRoute;
   // tslint:disable-next-line
   let http: HttpClient;
+  // tslint:disable-next-line
+  let store: Store<AppStore>;
 
   beforeEach(() => {
-    service = new UserService(http);
-    component = new HeaderComponent(service, router, activatedRoute);
+    service = new UserService(store, http);
+    component = new HeaderComponent(store, service, router, activatedRoute);
   });
 
   afterEach(() => {
-    localStorage.removeItem('video-courses');
     service = null;
     component = null;
   });

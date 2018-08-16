@@ -4,15 +4,17 @@ import {HttpClient} from '@angular/common/http';
 import {throwError, Observable} from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import {User} from './User';
+import {AppStore} from "../../app.store";
+import {Store} from "@ngrx/store";
 
 @Injectable()
 export class UserService {
   private loginUrl = 'http://localhost:3004/auth/login';
   private userUrl = 'http://localhost:3004/auth/userinfo';
-  private user: User;
   private token: string;
 
   constructor(
+    private store: Store<AppStore>,
     private http: HttpClient,
   ) {  }
 
@@ -21,12 +23,14 @@ export class UserService {
     return throwError(error.message || error);
   }
 
-  getUserData(): Observable<User> {
+  getUserData() {
     return this.getInfo()
       .pipe(
         map(response => response as User),
         catchError(this.handleError)
-      );
+      ).subscribe(user => {
+        this.store.dispatch({type: 'ADD_USER', payload: user });
+      });
   }
 
   getInfo() {
@@ -37,7 +41,6 @@ export class UserService {
     return this.http.post(this.loginUrl, {login, password})
       .pipe(
         map(auth => {
-          window.localStorage['video-courses'] = JSON.stringify({IsAuthenticated: true});
           this.token = auth['token'];
           return auth;
         })

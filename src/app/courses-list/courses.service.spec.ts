@@ -3,6 +3,8 @@ import {CoursesListComponent} from './courses-list/courses-list.component';
 import {FilterByPipe} from '../shared/pipes/filter-by.pipe';
 import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
+import {Store} from "@ngrx/store";
+import {AppStore} from "../app.store";
 
 describe('CoursesService', () => {
   let component: CoursesListComponent;
@@ -12,11 +14,13 @@ describe('CoursesService', () => {
   let router: Router;
   // tslint:disable-next-line
   let http: HttpClient;
+  // tslint:disable-next-line
+  let store: Store<AppStore>;
 
   beforeEach(() => {
-    service = new CoursesService(http);
+    service = new CoursesService(store, http);
     pipe = new FilterByPipe();
-    component = new CoursesListComponent(service, router);
+    component = new CoursesListComponent(store, service, router);
   });
 
   afterEach(() => {

@@ -3,6 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { CoursesPageComponent } from './courses-page.component';
 import {Router} from '@angular/router';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
+import {StoreModule} from "@ngrx/store";
 
 describe('CoursesListComponent', () => {
   let component: CoursesPageComponent;
@@ -10,6 +11,7 @@ describe('CoursesListComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [ StoreModule.forRoot({ }) ],
       declarations: [ CoursesPageComponent ],
       providers: [
         {

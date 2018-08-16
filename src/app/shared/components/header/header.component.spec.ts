@@ -7,6 +7,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {HttpClient, HttpHandler} from '@angular/common/http';
 import {Observable} from 'rxjs/index';
+import {StoreModule} from "@ngrx/store";
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -24,6 +25,7 @@ describe('HeaderComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [  StoreModule.forRoot({})],
       declarations: [ HeaderComponent ],
       providers: [
         { provide: UserService, useValue: mockUserService },
