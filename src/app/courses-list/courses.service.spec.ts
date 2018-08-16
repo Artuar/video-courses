@@ -3,8 +3,8 @@ import {CoursesListComponent} from './courses-list/courses-list.component';
 import {FilterByPipe} from '../shared/pipes/filter-by.pipe';
 import {Router} from '@angular/router';
 import {HttpClient} from '@angular/common/http';
-import {Store} from "@ngrx/store";
-import {AppStore} from "../app.store";
+import {Store} from '@ngrx/store';
+import {AppStore} from '../app.store';
 
 describe('CoursesService', () => {
   let component: CoursesListComponent;

@@ -6,7 +6,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {UserService} from '../core/services/user.service';
 import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {HttpClient, HttpHandler} from '@angular/common/http';
-import {StoreModule} from "@ngrx/store";
+import {StoreModule} from '@ngrx/store';
 
 describe('LoginComponent', () => {
 

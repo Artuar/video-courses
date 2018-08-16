@@ -4,8 +4,8 @@ import {HttpClient} from '@angular/common/http';
 import {throwError, Observable} from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import {User} from './User';
-import {AppStore} from "../../app.store";
-import {Store} from "@ngrx/store";
+import {AppStore} from '../../app.store';
+import {Store} from '@ngrx/store';
 
 @Injectable()
 export class UserService {

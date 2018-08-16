@@ -2,8 +2,8 @@ import {UserService} from './user.service';
 import {HeaderComponent} from '../../shared/components/header/header.component';
 import {HttpClient} from '@angular/common/http';
 import {ActivatedRoute, Router} from '@angular/router';
-import {AppStore} from "../../app.store";
-import {Store} from "@ngrx/store";
+import {AppStore} from '../../app.store';
+import {Store} from '@ngrx/store';
 
 describe('UserService', () => {
 

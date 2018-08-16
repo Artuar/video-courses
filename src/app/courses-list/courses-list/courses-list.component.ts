@@ -5,8 +5,8 @@ import {FilterByPipe} from '../../shared/pipes/filter-by.pipe';
 import {ToolboxComponent} from './toolbox/toolbox.component';
 import {ModalWindowComponent} from '../../shared/components/modal-window/modal-window.component';
 import {Router} from '@angular/router';
-import {Store} from "@ngrx/store";
-import {AppStore} from "../../app.store";
+import {Store} from '@ngrx/store';
+import {AppStore} from '../../app.store';
 
 @Component({
   selector: 'app-courses-list',
@@ -28,21 +28,25 @@ export class CoursesListComponent implements OnInit {
     private coursesService: CoursesService,
     private router: Router
   ) {
-    store && store.subscribe( store => {
-      let str = store['store'];
-      if(str){
-        this.courses = str.courses;
-        this.thereAreMore = str.thereAreMore;
-      }
-      this.loader = false;
-    },() =>  {
-      console.error('Error');
-      this.loader = false;
-    });
+    if (store) {
+      store.subscribe( reduxStore => {
+        const str = reduxStore['store'];
+        if (str) {
+          this.courses = str.courses;
+          this.thereAreMore = str.thereAreMore;
+        }
+        this.loader = false;
+      }, () =>  {
+        console.error('Error');
+        this.loader = false;
+      });
+    }
   }
 
   ngOnInit() {
-    this.courses.length || this.getCoursesList(true);
+    if (!this.courses.length) {
+      this.getCoursesList(true);
+    }
   }
 
   getCoursesList(fromBeginning?: boolean) {

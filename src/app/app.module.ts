@@ -12,7 +12,7 @@ import {CoreModule} from './core/core.module';
 import { NotFoundComponent } from './not-found/not-found.component';
 import {SharedModule} from './shared/shared.module';
 import {TokenInterceptor} from './shared/services/token.interceptor';
-import {appReduсer} from "./app.reduсer";
+import {appReduсer} from './app.reduсer';
 
 @NgModule({
   declarations: [

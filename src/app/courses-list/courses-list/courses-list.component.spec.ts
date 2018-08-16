@@ -6,7 +6,7 @@ import {CoursesService} from '../courses.service';
 import {HttpClient, HttpHandler} from '@angular/common/http';
 import {OrderByPipe} from '../../shared/pipes/order-by.pipe';
 import {Router} from '@angular/router';
-import {StoreModule} from "@ngrx/store";
+import {StoreModule} from '@ngrx/store';
 
 const TEST_VALUE = [
   {

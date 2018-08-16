@@ -4,8 +4,8 @@ import {Observable, throwError} from 'rxjs';
 import {Course} from './Course';
 import {HttpClient} from '@angular/common/http';
 import {catchError, map} from 'rxjs/internal/operators';
-import {Store} from "@ngrx/store";
-import {AppStore} from "../app.store";
+import {Store} from '@ngrx/store';
+import {AppStore} from '../app.store';
 
 
 @Injectable()
@@ -43,12 +43,11 @@ export class CoursesService {
           this.count += this.step;
           return {
             courses: (response || []) as Course[],
-            thereAreMore: response['length'] === this.step,
-            fromBeginning
+            thereAreMore: response['length'] === this.step
           };
         }),
         catchError(this.handleError)
-      ).subscribe(({courses, thereAreMore, fromBeginning}) => {
+      ).subscribe(({courses, thereAreMore}) => {
         this.store.dispatch({
           type: fromBeginning ? 'COURSES_LIST' : 'ADD_COURSES',
           payload: {courses, thereAreMore}
