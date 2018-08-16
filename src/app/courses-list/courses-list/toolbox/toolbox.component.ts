@@ -31,7 +31,7 @@ export class ToolboxComponent implements OnDestroy {
   }
 
   ngOnDestroy() {
-    this.queryObserver.complete();
+    this.queryObserver.unsubscribe();
   }
 
 }
