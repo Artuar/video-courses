@@ -5,6 +5,9 @@ import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CoursesService} from '../courses.service';
 import {Observable} from 'rxjs/index';
+import {StoreModule} from "@ngrx/store";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {AuthorService} from "../author.service";
 
 describe('CoursesItemEditComponent', () => {
   let component: CoursesItemEditComponent;
@@ -20,12 +23,22 @@ describe('CoursesItemEditComponent', () => {
     getCourseById: () => new Observable()
   };
 
+  const fakeAuthorService = {
+    getAuthorsList: () => {}
+  };
+
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
+      imports: [
+        FormsModule,
+        ReactiveFormsModule,
+        StoreModule.forRoot({})
+      ],
       declarations: [ CoursesItemEditComponent ],
       providers: [
         {provide: CoursesService, useValue: fakeCoursesService},
+        {provide: AuthorService, useValue: fakeAuthorService},
         {provide: ActivatedRoute, useValue: fakeActivatedRoute},
         {
           provide: Router,
@@ -48,7 +61,7 @@ describe('CoursesItemEditComponent', () => {
 
   it('onCancel should be called', () => {
     spyOn(component, 'onCancel');
-    component.course = new CourseClass(0, '', 0, 0, '', true);
+    component['id'] = 'new';
     fixture.detectChanges();
 
     const button = fixture.debugElement.nativeElement.querySelector('.cancel');
@@ -61,10 +74,11 @@ describe('CoursesItemEditComponent', () => {
 
   it('onSave should be called', () => {
     spyOn(component, 'onSave');
-    component.course = new CourseClass(0, '', 0, 0, '', true);
+    component['id'] = 'new';
     fixture.detectChanges();
 
     const button = fixture.debugElement.nativeElement.querySelector('.save');
+    button.disabled = false;
     button.click();
 
     fixture.whenStable().then(() => {

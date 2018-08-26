@@ -24,7 +24,7 @@ export class CoursesItemEditComponent implements OnInit {
     private coursesService: CoursesService,
     private authorService: AuthorService,
   ) {
-    this.activatedRoute.params.subscribe(params => {
+    this.activatedRoute && this.activatedRoute.params.subscribe(params => {
       this.id = params['id'] || 'new';
     });
     if(store) {
