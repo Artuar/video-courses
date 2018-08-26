@@ -3,7 +3,7 @@
   <div class="items" *ngIf="list.length">
     <div *ngFor="let item of list"
          class="item"
-         (click)="onSelect(item)">
+         (mousedown)="onSelect(item)">
       {{ item.name }}
     </div>
   </div>
