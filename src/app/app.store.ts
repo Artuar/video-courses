@@ -5,4 +5,5 @@ export interface AppStore {
   courses: Course[];
   thereAreMore: boolean;
   user: User;
+  authors: {id, name}[];
 }

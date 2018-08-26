@@ -6,6 +6,7 @@ import { SmartInputComponent } from './components/smart-input/smart-input.compon
 import {FormsModule} from '@angular/forms';
 import {ModalWindowComponent} from './components/modal-window/modal-window.component';
 import {SpeanerComponent} from './components/speaner/speaner.component';
+import { CustomSelectComponent } from './components/custom-select/custom-select.component';
 
 @NgModule({
   imports: [
@@ -16,13 +17,15 @@ import {SpeanerComponent} from './components/speaner/speaner.component';
     HeaderComponent,
     SmartInputComponent,
     ModalWindowComponent,
-    SpeanerComponent
+    SpeanerComponent,
+    CustomSelectComponent
   ],
   exports: [
     HeaderComponent,
     SmartInputComponent,
     ModalWindowComponent,
-    SpeanerComponent
+    SpeanerComponent,
+    CustomSelectComponent
   ],
   providers: [
     AuthGuardService

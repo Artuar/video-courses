@@ -1,45 +1,47 @@
-<app-breadcrumbs *ngIf="course" [title]="course.name || 'New course'"></app-breadcrumbs>
-<div class="courses_edit" *ngIf="course">
+<app-breadcrumbs [title]="(courseForm && courseForm.value.name) || 'New course'"></app-breadcrumbs>
+<div class="courses_edit" *ngIf="courseForm">
   <div class="head">New course</div>
   <div class="course_info">
     <div class="title">
       <label>Title:</label>
       <input type="text"
              placeholder="Course title"
-             [(ngModel)]="course.name"/>
+             [formControl]="courseForm.controls['name']"/>
     </div>
     <div class="description">
       <label>Description:</label>
           <textarea placeholder="Course description"
-                    [(ngModel)]="course.description"
-                    (ngModelChange)="onChange($event, 'description')"
-          >{{course.description}}</textarea>
+                    [formControl]="courseForm.controls['description']"
+          >{{courseForm.controls['description']}}</textarea>
     </div>
     <div class="duration">
       <label>Duration:</label>
       <input type="text"
              class="duration"
              placeholder="Course duration"
-             value="{{course.duration }}"
-             (change)="onChange($event, 'duration')"/>
+             [formControl]="courseForm.controls['duration']"/>
     </div>
     <div class="date">
       <label>Date:</label>
       <input type="date"
-             value="{{course.date | date: 'yyyy-MM-dd'}}"
-             (change)="onChange($event, 'date')"/>
+             [formControl]="courseForm.controls['date']"
+             value="{{courseForm.value.date | date: 'yyyy-MM-dd'}}"/>
     </div>
     <div class="authors">
       <label>Authors:</label>
-      <app-smart-input
-        *ngIf="authorsArray.length"
-        [startList]="authorsArray"
-        (change)="onChange($event, 'authors')">
-      </app-smart-input>
+      <app-custom-select
+        [list]="foundedAuthors"
+        (select)="onSelectItem($event)">
+        <app-smart-input
+          [startList]="authorsArray || []"
+          (keyPress)="onKeyupAuthors($event)"
+          (remove)="onRemove($event)">
+        </app-smart-input>
+      </app-custom-select>
     </div>
   </div>
   <div class="course_actions">
     <div class="cancel" (click)="onCancel()">Cancel</div>
-    <div class="save" (click)="onSave()">Save</div>
+    <button class="save" [disabled]="!courseForm.valid" (click)="onSave(courseForm.value)">Save</button>
   </div>
 </div>

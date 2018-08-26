@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CoursesService} from '../courses.service';
-import {Course} from '../Course';
+import {FormControl, FormGroup, Validators} from "@angular/forms";
+import {AuthorService} from "../author.service";
+import {AppStore} from "../../app.store";
+import {Store} from "@ngrx/store";
 
 @Component({
   selector: 'app-courses-item-edit',
@@ -10,20 +13,38 @@ import {Course} from '../Course';
 })
 export class CoursesItemEditComponent implements OnInit {
   private id: string;
-  public course: Course;
   public authorsArray: string[] = [];
+  public foundedAuthors: string[] = [];
+  public courseForm: FormGroup;
 
   constructor(
+    private store: Store<AppStore>,
     private activatedRoute: ActivatedRoute,
     private router: Router,
-    private coursesService: CoursesService
+    private coursesService: CoursesService,
+    private authorService: AuthorService,
   ) {
     this.activatedRoute.params.subscribe(params => {
       this.id = params['id'] || 'new';
     });
+    if(store) {
+      store.subscribe( reduxStore => {
+        const str = reduxStore['store'];
+        if (str) {
+          this.foundedAuthors = str.foundedAuthors;
+        }
+      }, () =>  {
+        console.error('Error');
+      });
+    }
   }
 
   ngOnInit() {
+    this.autoFill();
+    this.authorService.getAuthorsList();
+  }
+
+  autoFill() {
     if (this.id !== 'new') {
       this.coursesService
         .getCourseById(+this.id)
@@ -32,38 +53,68 @@ export class CoursesItemEditComponent implements OnInit {
             if (!course) {
               this.onCancel();
             }
-            this.course = course;
-            this.authorsArray = this.course.authors
+            this.formValidateInit(course);
+            this.authorsArray = course.authors
               .map(auth => `${auth['firstName']} ${auth['lastName']}`);
           },
           () =>  {
             console.error('Error');
           });
     } else {
-      this.course = {
+      this.formValidateInit({
         name: '',
         duration: 0,
         description: '',
         authors: []
-      } as Course;
-    }
-  }
-
-  onChange($event, property) {
-    let value = $event.target ? $event.target.value : $event;
-    if (property === 'date') {
-      value = new Date(value).getTime();
-    } else if (property === 'authors') {
-      value = value.map(author => {
-        const authNameArr = author.split(' ');
-        return {firstName: authNameArr.shift(), lastName: authNameArr.join(' ')};
       });
     }
-    this.course[property] = value;
   }
 
-  onSave() {
-    this.coursesService.saveCourse(this.course);
+  formValidateInit(course) {
+    this.courseForm = new FormGroup({
+      id: new FormControl(this.id, [Validators.required]),
+      name: new FormControl(course.name, [Validators.required]),
+      duration: new FormControl(course.duration, [Validators.required]),
+      description: new FormControl(course.description  , [Validators.required]),
+      date: new FormControl(course.date, [Validators.required]),
+      authors: new FormControl(course.authors)
+    });
+  }
+
+  onChangeAuthors($event) {
+    this.courseForm.value.authors = $event.map(author => {
+      const authNameArr = author.split(' ');
+      return {firstName: authNameArr.shift(), lastName: authNameArr.join(' ')};
+    });
+  }
+
+  onKeyupAuthors($event) {
+    this.store.dispatch({type: 'FIND_AUTHORS', payload: $event});
+  }
+
+  onSelectItem($event) {
+    this.authorsArray.push($event.name);
+
+    const authNameArr = $event.name.split(' ');
+    this.courseForm.value.authors.push({firstName: authNameArr.shift(), lastName: authNameArr.join(' ')});
+
+    this.onKeyupAuthors('');
+  }
+
+  onRemove($event) {
+    this.authorsArray = this.authorsArray.filter(item => item !== $event);
+
+    const authNameArr = $event.split(' ');
+    const firstName = authNameArr.shift();
+    const lastName = authNameArr.join(' ');
+    this.courseForm.value.authors = this.courseForm.value.authors.filter(item =>
+      !(item.firstName === firstName && item.lastName === lastName));
+
+    this.onKeyupAuthors('');
+  }
+
+  onSave(course) {
+    this.coursesService.saveCourse(course);
     this.onCancel();
   }
 

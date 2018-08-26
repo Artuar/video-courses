@@ -7,34 +7,31 @@ import {Component, EventEmitter, Input, OnInit, Output, ViewEncapsulation} from 
   encapsulation: ViewEncapsulation.Native
 })
 export class SmartInputComponent implements OnInit {
-  @Input() startList: string[];
-  @Output() change = new EventEmitter();
-  public list: string[];
+  @Input() startList: string[] = [];
+  @Output() remove = new EventEmitter();
+  @Output() keyPress = new EventEmitter();
   public text: string;
 
   constructor() { }
 
   ngOnInit() {
-    this.list = this.startList ? [...this.startList] : [];
   }
 
-  keyPress($event) {
+  keyClick($event) {
     if ($event.key === 'Enter') {
       this.addText();
+    } else {
+      this.keyPress.emit(this.text);
     }
   }
 
   addText() {
-    if (!this.list.some(item => item === this.text) && this.text) {
-      this.list.push(this.text);
-      this.text = '';
-      this.change.emit(this.list);
-    }
+    this.text = '';
+    this.keyPress.emit(this.text);
   }
 
-  remove(text) {
-    this.list = this.list.filter(item => item !== text);
-    this.change.emit(this.list);
+  onRemove(text) {
+    this.remove.emit(text);
   }
 
 }

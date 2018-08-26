@@ -3,7 +3,8 @@
     <input type="text"
            placeholder="Text to search"
            class="search_field"
-           (keyup)="onSearch($event)"/>
+           [(ngModel)]="query"
+           (keyup)="onSearch()"/>
   </div>
   <div class="add_course" (click)="addCourse($event)">Add course</div>
 </div>

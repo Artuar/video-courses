@@ -1,11 +1,11 @@
 <div class="smart-input">
-  <div *ngFor="let item of list"
+  <div *ngFor="let item of startList"
        class="item">
     <div class="text">{{item}}</div>
-    <div class="remove" (click)="remove(item)">x</div>
+    <div class="remove" (click)="onRemove(item)">x</div>
   </div>
   <input type="text"
          [(ngModel)]="text"
          (blur)="addText()"
-         (keyup)="keyPress($event)">
+         (keyup)="keyClick($event)">
 </div>

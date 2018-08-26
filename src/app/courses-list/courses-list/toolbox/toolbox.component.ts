@@ -1,37 +1,27 @@
-import {Component, EventEmitter, OnDestroy, Output} from '@angular/core';
-import {Observable} from 'rxjs/index';
+import {Component, EventEmitter, Output} from '@angular/core';
 
 @Component({
   selector: 'app-toolbox',
   templateUrl: './toolbox.component.html',
   styleUrls: ['./toolbox.component.scss']
 })
-export class ToolboxComponent implements OnDestroy {
+export class ToolboxComponent {
   @Output() search = new EventEmitter();
   @Output() add = new EventEmitter();
 
-  public queryObserver;
-  public queryObservable = new Observable(observer => this.queryObserver = observer);
+  public query: string = '';
 
-  constructor() {
-    this.queryObservable
-      .subscribe(str => this.search.emit(str));
-  }
+  constructor() { }
 
-  onSearch($event) {
-    const str = $event.target.value;
-    if (!str || str.length > 2) {
-      this.queryObserver.next(str);
+  onSearch() {
+    if (!this.query || this.query.length > 2) {
+      this.search.emit(this.query);
     }
   }
 
   addCourse($event) {
     $event.stopPropagation();
     this.add.emit();
-  }
-
-  ngOnDestroy() {
-    this.queryObserver.unsubscribe();
   }
 
 }

@@ -4,17 +4,19 @@
     <div class="title">
       Login
     </div>
-    <div class="form">
+    <form [formGroup]="loginForm" (ngSubmit)="login(loginForm.value)">
       <div class="field email">
-        <input type="text" placeholder="Email" [(ngModel)]="email">
+        <input type="text" placeholder="Email"
+               [formControl]="loginForm.controls['email']"
+               [ngClass]="{'error': !loginForm.controls['email'].valid}">
       </div>
       <div class="field password">
-        <input type="password" placeholder="Password" [(ngModel)]="password">
+        <input type="password" placeholder="Password"
+               [formControl]="loginForm.controls['password']"
+               [ngClass]="{'error': !loginForm.controls['password'].valid}">
       </div>
-      <div class="login-button" (click)="login()">
-        Login
-      </div>
-    </div>
+      <button class="login-button" type="submit">Login</button>
+    </form>
   </div>
 </div>
 <app-modal-window></app-modal-window>

@@ -1,0 +1,19 @@
+@import '../../../../assets/styles/constants';
+
+.custom-select{
+  position: relative;
+  .items {
+    border: 1px solid $grey;
+    position: absolute;
+    right: 0;
+    left: 0;
+    .item {
+      background: $white;
+      padding: 3px;
+      cursor: pointer;
+      &:hover {
+        background: $lightGrey;
+      }
+    }
+  }
+}

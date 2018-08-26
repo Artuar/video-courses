@@ -3,6 +3,7 @@ import {Router} from '@angular/router';
 import {UserService} from '../core/services/user.service';
 import {ModalWindowComponent} from '../shared/components/modal-window/modal-window.component';
 import {ViewChild} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-login',
@@ -11,26 +12,35 @@ import {ViewChild} from '@angular/core';
 })
 export class LoginComponent {
   public title: string;
-  public email: string;
-  public password: string;
+  public loginForm : FormGroup;
 
   @ViewChild(ModalWindowComponent) modal: ModalWindowComponent;
 
   constructor(
     private router: Router,
-    private userService: UserService
-  ) { }
+    private userService: UserService,
+    private formBuilder: FormBuilder
+  ) {  }
 
-  login() {
-    this.userService.login(this.email, this.password)
+  ngOnInit() {
+    this.loginForm = this.formBuilder.group({
+      email: ['', Validators.required],
+      password: ['', Validators.required]
+    })
+  }
+
+  login({email, password}) {
+    this.userService.login(email, password)
       .subscribe(
         data => this.router.navigateByUrl(''),
-        e => this.modal.show({
-          title: 'Authorization error',
-          message: e.error,
-          buttonText: 'Try again',
-          buttonAction: () => {}
-        }));
+        e => this.showErrorPopup(e.error));
+  }
+
+  showErrorPopup(error){
+    this.modal.show({
+      title: 'Authorization error',
+      message: error,
+    })
   }
 
 }

@@ -1,0 +1,10 @@
+<div class="custom-select">
+  <ng-content></ng-content>
+  <div class="items" *ngIf="list.length">
+    <div *ngFor="let item of list"
+         class="item"
+         (click)="onSelect(item)">
+      {{ item.name }}
+    </div>
+  </div>
+</div>
