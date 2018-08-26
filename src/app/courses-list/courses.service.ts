@@ -80,10 +80,11 @@ export class CoursesService {
     let url = `${this.courseUrl}/${courseProps.id}`;
     let type = 'EDIT_COURSE';
     let method = 'put';
-    if (!courseProps.id) {
+    if (!courseProps.id || courseProps.id === 'new') {
       url = this.courseUrl;
       type = 'SAVE_COURSE';
       method = 'post';
+      delete courseProps.id;
     }
     return this.http[method](url, courseProps)
       .pipe(

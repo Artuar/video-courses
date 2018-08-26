@@ -1,18 +1,18 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {UserService} from '../core/services/user.service';
 import {ModalWindowComponent} from '../shared/components/modal-window/modal-window.component';
 import {ViewChild} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   public title: string;
-  public loginForm : FormGroup;
+  public loginForm: FormGroup;
 
   @ViewChild(ModalWindowComponent) modal: ModalWindowComponent;
 
@@ -26,7 +26,7 @@ export class LoginComponent {
     this.loginForm = this.formBuilder.group({
       email: ['', Validators.required],
       password: ['', Validators.required]
-    })
+    });
   }
 
   login({email, password}) {
@@ -36,11 +36,11 @@ export class LoginComponent {
         e => this.showErrorPopup(e.error));
   }
 
-  showErrorPopup(error){
+  showErrorPopup(error) {
     this.modal.show({
       title: 'Authorization error',
       message: error,
-    })
+    });
   }
 
 }

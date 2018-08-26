@@ -12,7 +12,7 @@ import {SharedModule} from '../shared/shared.module';
 import {CoursesItemEditComponent} from './courses-item-edit/courses-item-edit.component';
 import { CoursesRoutingModule } from './courses-routing.module';
 import { CoursesPageComponent } from './courses-page/courses-page.component';
-import {AuthorService} from "./author.service";
+import {AuthorService} from './author.service';
 
 @NgModule({
   imports:      [

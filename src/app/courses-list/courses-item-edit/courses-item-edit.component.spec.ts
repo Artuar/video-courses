@@ -5,9 +5,9 @@ import {NO_ERRORS_SCHEMA} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CoursesService} from '../courses.service';
 import {Observable} from 'rxjs/index';
-import {StoreModule} from "@ngrx/store";
-import {FormsModule, ReactiveFormsModule} from "@angular/forms";
-import {AuthorService} from "../author.service";
+import {StoreModule} from '@ngrx/store';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {AuthorService} from '../author.service';
 
 describe('CoursesItemEditComponent', () => {
   let component: CoursesItemEditComponent;

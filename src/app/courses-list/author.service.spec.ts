@@ -1,12 +1,10 @@
-import { TestBed, inject } from '@angular/core/testing';
-
 import { AuthorService } from './author.service';
-import {AppStore} from "../app.store";
-import {Store} from "@ngrx/store";
-import {HttpClient} from "@angular/common/http";
-import {CoursesItemEditComponent} from "./courses-item-edit/courses-item-edit.component";
-import {CoursesService} from "./courses.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import {AppStore} from '../app.store';
+import {Store} from '@ngrx/store';
+import {HttpClient} from '@angular/common/http';
+import {CoursesItemEditComponent} from './courses-item-edit/courses-item-edit.component';
+import {CoursesService} from './courses.service';
+import {ActivatedRoute, Router} from '@angular/router';
 
 describe('AuthorService', () => {
   let component: CoursesItemEditComponent;

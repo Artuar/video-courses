@@ -24,7 +24,7 @@ export function appReduсer(state = DEFAULT_STATE, {type, payload}) {
       return {...state, authors: payload};
     case 'FIND_AUTHORS':
       return {...state, foundedAuthors: payload ? state.authors.filter(
-          author => ~author.name.indexOf(payload)
+          author => author.name.indexOf(payload) !== -1
         ) : []};
     default:
       return {...state};

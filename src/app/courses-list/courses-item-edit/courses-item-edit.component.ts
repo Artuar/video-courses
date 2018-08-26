@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CoursesService} from '../courses.service';
-import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {AuthorService} from "../author.service";
-import {AppStore} from "../../app.store";
-import {Store} from "@ngrx/store";
+import {FormControl, FormGroup, Validators} from '@angular/forms';
+import {AuthorService} from '../author.service';
+import {AppStore} from '../../app.store';
+import {Store} from '@ngrx/store';
 
 @Component({
   selector: 'app-courses-item-edit',
@@ -24,10 +24,12 @@ export class CoursesItemEditComponent implements OnInit {
     private coursesService: CoursesService,
     private authorService: AuthorService,
   ) {
-    this.activatedRoute && this.activatedRoute.params.subscribe(params => {
-      this.id = params['id'] || 'new';
-    });
-    if(store) {
+    if (this.activatedRoute) {
+      this.activatedRoute.params.subscribe(params => {
+        this.id = params['id'] || 'new';
+      });
+    }
+    if (store) {
       store.subscribe( reduxStore => {
         const str = reduxStore['store'];
         if (str) {

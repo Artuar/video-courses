@@ -9,7 +9,7 @@ export class ToolboxComponent {
   @Output() search = new EventEmitter();
   @Output() add = new EventEmitter();
 
-  public query: string = '';
+  public query = '';
 
   constructor() { }
 
